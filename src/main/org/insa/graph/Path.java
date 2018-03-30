@@ -209,7 +209,12 @@ public class Path {
      */
     public float getLength() {
         // TODO:
-        return 0;
+    	float somme = 0;
+    	int i;
+        for (i=0; i < this.arcs.size(); i++) {
+        		somme += this.arcs.get(i).getLength();
+        }
+        return somme;
     }
 
     /**
@@ -224,7 +229,7 @@ public class Path {
      */
     public double getTravelTime(double speed) {
         // TODO:
-        return 0;
+    	return getLength() * 3600.0 / (speed * 1000.0);
     }
 
     /**
@@ -237,7 +242,12 @@ public class Path {
      */
     public double getMinimumTravelTime() {
         // TODO:
-        return 0;
+    	int i;
+    	double minTravelTime = 0;
+        for (i=0; i < this.arcs.size(); i++) {
+    		minTravelTime += (getLength() * 3600.0 / this.arcs.get(i).getMinimumTravelTime() * 1000.0);
+        }
+        return minTravelTime;
     }
 
 }
