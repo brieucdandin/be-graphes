@@ -196,8 +196,20 @@ public class Path {
      * @deprecated Need to be implemented.
      */
     public boolean isValid() {
-        // TODO:
-        return false;
+        boolean b = true;
+    	if (this.size()==0 || (this.size()==1 && isEmpty(this.getArcs()))) {
+        	return b;
+    	}
+    	if (this.Node(0)==) {
+    		b=false;
+    	}
+    	if (b=true) {
+        	int k = 1;
+            while (b=true) {
+            	if ()
+            }
+    	}
+		return b;
     }
 
     /**
