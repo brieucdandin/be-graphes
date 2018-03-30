@@ -50,8 +50,31 @@ public class Path {
      */
     public static Path createShortestPathFromNodes(Graph graph, List<Node> nodes)
             throws IllegalArgumentException {
-        List<Arc> arcs = new ArrayList<Arc>();
-        // TODO:
+    	List<Arc> arcs = new ArrayList<Arc>();
+    	for (int k=0; k<nodes.size(); k++) {
+    		
+//    		Début du test pour IllegalArgumentException.
+    		List<Arc> successeurs = nodes.get(k).iterator();
+    		boolean test = false;
+    		for (int j=0; j<successeurs.size(); j++) {
+    			if (nodes.get(k+1) == nodes.get(k).iterator().get(j).getDestination()) {
+    				test=true;
+    			}
+    		}
+    		if (test = false) {
+    			throw new IllegalArgumentException();
+    		}
+//    		Fin du test pour IllegalArgumentException.
+    		
+    		List<Arc> arcsPotentiels = nodes.get(k).iterator();
+    		Arc arcDeTailleMin = arcsPotentiels.get(0);
+    		for (int i=0; i<arcsPotentiels.size(); i++) {
+    			if (arcsPotentiels.get(k).getLength() < arcDeTailleMin.getLength() ) {
+    				arcDeTailleMin = arcsPotentiels.get(k);
+    			}
+    			arcs.add(k, arcDeTailleMin);
+    		}
+    	}
         return new Path(graph, arcs);
     }
 
@@ -218,11 +241,9 @@ public class Path {
      * Compute the length of this path (in meters).
      * 
      * @return Total length of the path (in meters).
-     * 
-     * @deprecated Need to be implemented.
+     *
      */
     public float getLength() {
-        // TODO:
     	float somme = 0;
     	int i;
         for (i=0; i < this.arcs.size(); i++) {
@@ -238,11 +259,9 @@ public class Path {
      * 
      * @return Time (in seconds) required to travel this path at the given speed (in
      *         kilometers-per-hour).
-     * 
-     * @deprecated Need to be implemented.
+     *
      */
     public double getTravelTime(double speed) {
-        // TODO:
     	return getLength() * 3600.0 / (speed * 1000.0);
     }
 
@@ -251,11 +270,9 @@ public class Path {
      * on every arc.
      * 
      * @return Minimum travel time to travel this path (in seconds).
-     * 
-     * @deprecated Need to be implemented.
+     *
      */
     public double getMinimumTravelTime() {
-        // TODO:
     	int i;
     	double minTravelTime = 0;
         for (i=0; i < this.arcs.size(); i++) {
