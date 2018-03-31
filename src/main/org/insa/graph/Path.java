@@ -24,13 +24,33 @@ public class Path {
      * 
      * @throws IllegalArgumentException If the list of nodes is not valid, i.e. two
      *         consecutive nodes in the list are not connected in the graph.
-     * 
-     * @deprecated Need to be implemented.
+     *
      */
     public static Path createFastestPathFromNodes(Graph graph, List<Node> nodes)
             throws IllegalArgumentException {
-        List<Arc> arcs = new ArrayList<Arc>();
-        // TODO:
+        List<Arc> arcs = new ArrayList<Arc>();for (int k=0; k<nodes.size(); k++) {
+    		
+//    		Début du test pour IllegalArgumentException.
+    		List<Arc> arcsPotentiels = nodes.get(k).iterator();
+    		boolean test = false;
+    		for (int j=0; j<arcsPotentiels.size(); j++) {
+    			if (nodes.get(k+1) == arcsPotentiels.get(j).getDestination()) {
+    				test=true;
+    			}
+    		}
+    		if (test = false) {
+    			throw new IllegalArgumentException();
+    		}
+//    		Fin du test pour IllegalArgumentException.
+    		
+    		Arc arcDeTailleMin = arcsPotentiels.get(0);
+    		for (int i=0; i<arcsPotentiels.size(); i++) {
+    			if (arcsPotentiels.get(k).getMinimumTravelTime() < arcDeTailleMin.getMinimumTravelTime() ) {
+    				arcDeTailleMin = arcsPotentiels.get(k);
+    			}
+    			arcs.add(k, arcDeTailleMin);
+    		}
+    	}
         return new Path(graph, arcs);
     }
 
@@ -45,8 +65,7 @@ public class Path {
      * 
      * @throws IllegalArgumentException If the list of nodes is not valid, i.e. two
      *         consecutive nodes in the list are not connected in the graph.
-     * 
-     * @deprecated Need to be implemented.
+     *
      */
     public static Path createShortestPathFromNodes(Graph graph, List<Node> nodes)
             throws IllegalArgumentException {
@@ -54,10 +73,10 @@ public class Path {
     	for (int k=0; k<nodes.size(); k++) {
     		
 //    		Début du test pour IllegalArgumentException.
-    		List<Arc> successeurs = nodes.get(k).iterator();
+    		List<Arc> arcsPotentiels = nodes.get(k).iterator();
     		boolean test = false;
-    		for (int j=0; j<successeurs.size(); j++) {
-    			if (nodes.get(k+1) == nodes.get(k).iterator().get(j).getDestination()) {
+    		for (int j=0; j<arcsPotentiels.size(); j++) {
+    			if (nodes.get(k+1) == arcsPotentiels.get(j).getDestination()) {
     				test=true;
     			}
     		}
@@ -66,7 +85,6 @@ public class Path {
     		}
 //    		Fin du test pour IllegalArgumentException.
     		
-    		List<Arc> arcsPotentiels = nodes.get(k).iterator();
     		Arc arcDeTailleMin = arcsPotentiels.get(0);
     		for (int i=0; i<arcsPotentiels.size(); i++) {
     			if (arcsPotentiels.get(k).getLength() < arcDeTailleMin.getLength() ) {
