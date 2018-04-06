@@ -1,7 +1,9 @@
 package org.insa.graph;
 
+
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -28,30 +30,25 @@ public class Path {
      */
     public static Path createFastestPathFromNodes(Graph graph, List<Node> nodes)
             throws IllegalArgumentException {
-        List<Arc> arcs = new ArrayList<Arc>();for (int k=0; k<nodes.size(); k++) {
-    		
-//    		Début du test pour IllegalArgumentException.
-    		List<Arc> arcsPotentiels = nodes.get(k).iterator();
+        List<Arc> arcsSelectionnes = new ArrayList<Arc>();
+        for (int k=0; k<nodes.size()-1; k++) {
+    		Arc arcDeTailleMin = null;
     		boolean test = false;
-    		for (int j=0; j<arcsPotentiels.size(); j++) {
-    			if (nodes.get(k+1) == arcsPotentiels.get(j).getDestination()) {
-    				test=true;
+    		for (Arc it : nodes.get(k)) {
+    		//ou " Iterator<Arc> it = nodes.get(k).iterator(); it.hasNext() "
+    			if (it.getDestination() == nodes.get(k+1)) {
+    				test = true;
+    				if ( arcDeTailleMin == null || it.getMinimumTravelTime() < arcDeTailleMin.getMinimumTravelTime() ) {
+    					arcDeTailleMin = it;
+    				}
     			}
-    		}
-    		if (test = false) {
-    			throw new IllegalArgumentException();
-    		}
-//    		Fin du test pour IllegalArgumentException.
-    		
-    		Arc arcDeTailleMin = arcsPotentiels.get(0);
-    		for (int i=0; i<arcsPotentiels.size(); i++) {
-    			if (arcsPotentiels.get(k).getMinimumTravelTime() < arcDeTailleMin.getMinimumTravelTime() ) {
-    				arcDeTailleMin = arcsPotentiels.get(k);
-    			}
-    			arcs.add(k, arcDeTailleMin);
+    			if (test == false) {
+        			throw new IllegalArgumentException();
+        		}
+    			arcsSelectionnes.add(k, arcDeTailleMin);
     		}
     	}
-        return new Path(graph, arcs);
+        return new Path(graph, arcsSelectionnes);
     }
 
     /**
@@ -69,31 +66,25 @@ public class Path {
      */
     public static Path createShortestPathFromNodes(Graph graph, List<Node> nodes)
             throws IllegalArgumentException {
-    	List<Arc> arcs = new ArrayList<Arc>();
-    	for (int k=0; k<nodes.size(); k++) {
-    		
-//    		Début du test pour IllegalArgumentException.
-    		List<Arc> arcsPotentiels = nodes.get(k).iterator();
-    		boolean test = false;
-    		for (int j=0; j<arcsPotentiels.size(); j++) {
-    			if (nodes.get(k+1) == arcsPotentiels.get(j).getDestination()) {
-    				test=true;
+    	List<Arc> arcsSelectionnes = new ArrayList<Arc>();
+        for (int k=0; k<nodes.size()-1; k++) {
+    		Arc arcDeTailleMin = null;
+    		boolean test = false;	
+    		for (Arc it : nodes.get(k)) {
+    		//ou " Iterator<Arc> it = nodes.get(k).iterator(); it.hasNext() "
+    			if (it.getDestination() == nodes.get(k+1)) {
+    				test = true;
+    				if ( arcDeTailleMin == null || it.getLength() < arcDeTailleMin.getLength() ) {
+    					arcDeTailleMin = it;
+    				}
     			}
-    		}
-    		if (test = false) {
-    			throw new IllegalArgumentException();
-    		}
-//    		Fin du test pour IllegalArgumentException.
-    		
-    		Arc arcDeTailleMin = arcsPotentiels.get(0);
-    		for (int i=0; i<arcsPotentiels.size(); i++) {
-    			if (arcsPotentiels.get(k).getLength() < arcDeTailleMin.getLength() ) {
-    				arcDeTailleMin = arcsPotentiels.get(k);
-    			}
-    			arcs.add(k, arcDeTailleMin);
+    			if (test == false) {
+        			throw new IllegalArgumentException();
+        		}
+    			arcsSelectionnes.add(k, arcDeTailleMin);
     		}
     	}
-        return new Path(graph, arcs);
+        return new Path(graph, arcsSelectionnes);
     }
 
     /**
@@ -240,18 +231,16 @@ public class Path {
     	if (this.isEmpty() || this.getArcs().isEmpty() ) {
     		return b;
     	}
-    	if (this.getArcs().get(0).getOrigin() == this.getOrigin() ) {
+    	else if (this.getArcs().get(0).getOrigin() == this.getOrigin() ) {
         	int k = 1;
-            while (b=true && k<this.getArcs().size()) {
+            while (b=true && k<this.getArcs().size()-1) {
             	if (this.getArcs().get(k).getDestination() != this.getArcs().get(k+1).getOrigin() ) {
             		b=false;	
             	}
-            k++;
+            	k++;
             }
     	}
-    	else {
-    		b=false;
-    	}
+    	else { b=false; }
 		return b;
     }
 
