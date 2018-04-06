@@ -10,6 +10,7 @@
 package org.insa.algo.utils;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Implements a binary heap. Note that all "matching" is based on the compareTo
@@ -144,7 +145,27 @@ public class BinaryHeap<E extends Comparable<E>> implements PriorityQueue<E> {
 
     @Override
     public void remove(E x) throws ElementNotFoundException {
-        // TODO:
+        // TODO:    	
+    	
+    	if (this.isEmpty() || this.array.indexOf(x) == -1 || this.array.indexOf(x) > this.currentSize-1) {
+    		System.out.println("Element non trouve dans tas !\n");
+    		throw new ElementNotFoundException(x);
+    	}
+    	else {
+    		int indSuppr = this.array.indexOf(x);
+    		int indParent = this.index_parent(indSuppr);
+    		this.arraySet(indSuppr, this.array.get(this.currentSize-1));
+
+    		this.currentSize--;
+    		
+    		if (indSuppr == 0 || this.array.get(indParent).compareTo(this.array.get(indSuppr)) < 0) {
+    			this.percolateDown(indSuppr);
+    		}
+   			else
+    		{
+    			this.percolateUp(indSuppr);
+    		}
+    	}
     }
 
     @Override
