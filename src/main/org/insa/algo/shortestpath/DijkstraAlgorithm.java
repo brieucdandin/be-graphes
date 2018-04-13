@@ -2,16 +2,19 @@ package org.insa.algo.shortestpath;
 
 //Importation des classes dans la classe imoprté
 import org.insa.graph.*;
+import java.util.ArrayList;
 
 public class DijkstraAlgorithm extends ShortestPathAlgorithm {
 
-	private ArrayList<Label> label
+	private ArrayList<Label> ListeLabels<Label>;
 	
     public DijkstraAlgorithm(ShortestPathData data) {
         super(data);
         
         //Initialisation
-        for(int i=0; i<)
+        for(Label l: ListeLabels) {
+        	
+        }
     }
 
     
