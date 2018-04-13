@@ -4,11 +4,11 @@ public class Label {
 
 	private Node noeud;
 	private Node prec;
-	private int marquage;
+	private boolean marquage;
 	private int cout;
 	
 	
-	public Label (Node noeud, Node prec, int cout, int marquage) {
+	public Label (Node noeud, Node prec, int cout, boolean marquage) {
 		this.noeud = noeud;
 		this.prec = prec;
 		this.cout = cout;
@@ -27,7 +27,7 @@ public class Label {
 		return this.prec;
 	}
 	
-	public int getMarq() {
+	public boolean getMarq() {
 		return this.marquage;
 	}
 	
@@ -39,7 +39,7 @@ public class Label {
 		this.prec=prec;
 	}
 
-	public void setMarq(int marquage) {
+	public void setMarq(boolean marquage) {
 		this.marquage=marquage;
 	}
 }
