@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class DijkstraAlgorithm extends ShortestPathAlgorithm {
 
-	private ArrayList<Label> ListeLabels<Label>;
+	private ArrayList<Label> ListeLabels = new ArrayList<Label>();
 	
     public DijkstraAlgorithm(ShortestPathData data) {
         super(data);
