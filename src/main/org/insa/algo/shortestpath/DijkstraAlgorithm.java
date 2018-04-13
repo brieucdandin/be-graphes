@@ -11,7 +11,17 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
     public DijkstraAlgorithm(ShortestPathData data) {
         super(data);
         
-        //Initialisation
+        /* Initialisation
+         * 
+         * For tous les sommets i  de 1 à n
+         * 		Mark(i) <- Faux
+         * 		Cost(i) <- +inf
+         * 		Father(i) <- 0   // sommet inexistant
+         * end for
+         * Cost(s) <- 0
+         * Insert(s, Tas)
+         */
+        
         for(Label l: ListeLabels) {
         	
         }
@@ -19,6 +29,23 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
 
     
     
+    
+    /* Itéartion
+     * 
+     * While il existe des sommets non marqués
+     * 		x <- ExtractMin(Tas)
+     * 		Mark(x) <- true
+     * 		For tous les y successeurs de x
+     * 			If not Mark(y) then
+     * 				Cost(y) <- Min(Cost(y), Cost(x)+W(x,y))
+     * 				If Cost(y) a été mis à jour then
+     * 					Placer(y, Tas)
+     * 					Father(y) <- x
+     * 				end if
+     * 			end if
+     * 		end for
+     * end while
+     */
     
     
     @Override
