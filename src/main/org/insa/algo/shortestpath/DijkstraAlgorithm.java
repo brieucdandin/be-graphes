@@ -4,16 +4,16 @@ import org.insa.algo.utils.BinaryHeap;
 //Importation des classes dans la classe imoprtee
 import org.insa.graph.*;
 import java.util.ArrayList;
-<<<<<<< HEAD
+
 //import org.insa.algo.utils.BinaryHeap;
-=======
+
 /*
 import org.insa.graph.Arc;
 import org.insa.graph.Graph;
 import org.insa.graph.Node;
 import org.insa.graph.Path;
 */
->>>>>>> 05c9d5a97f3e0458950d88a5ea4e25b28dfe36fb
+
 
 public class DijkstraAlgorithm extends ShortestPathAlgorithm {
 
@@ -21,9 +21,9 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
 
     public DijkstraAlgorithm(ShortestPathData data) {
         super(data);
-        BinaryHeap<Label> tas = null;
-        
-        
+        ArrayList<Label> tas = new ArrayList<Label>();
+        BinaryHeap<tas> ListLab = new BinaryHeap();
+                
         /*			INITIALISATION
          * 
          * For tous les sommets i  de 1 a n
@@ -34,14 +34,13 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
          * Cost(s) <- 0
          * Insert(s, tas)
          */
-        
         for(Label l: ListeLabels) {
         	l.setMarq(false);
         	l.setCout(999999);
-        	l.setPrec(null);
+        	l.setNoeudPrec(null);
         }
         ListeLabels.get(0).setCout(0);
-<<<<<<< HEAD
+
         //insertion du sommet source dans le tas
         tas.insert(ListeLabels.get(0));
         
@@ -80,17 +79,17 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         			// Si y a été modifie
         			if (a != ly.getCout()) {
         				tas.insert(ly);
-        				ly.setPrec(lx);
+        				ly.setNoeudPrec(lx);
         			}
         		}
         	} // FIN FOR successeurs
             
         } // Fin ITERATION
-=======
+        
+        
         //Insertion du sommet source dans le tas
         tas.insert(ListeLabels.get(0));
 
->>>>>>> 05c9d5a97f3e0458950d88a5ea4e25b28dfe36fb
         
         
         /*			ITERATION
@@ -151,10 +150,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
      } 
     
     
-<<<<<<< HEAD
-=======
-    
->>>>>>> 05c9d5a97f3e0458950d88a5ea4e25b28dfe36fb
+
     @Override
     protected ShortestPathSolution doRun() {
         ShortestPathData data = getInputData();
