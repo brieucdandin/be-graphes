@@ -119,13 +119,13 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         	for (Label ly : ListeLabels) {	// TODO: Prendre juste les successeurs de x, pas toute la liste
         		if (ly.getMarq() == false) {
         			
-        			// Mise en mémoire tampon de Cost(y) pour le test du prochain if
+        			// Mise en memoire tampon de Cost(y) pour le test du prochain if
         			int a = ly.getCout();
         			
         			// TODO: Verifier que l'algo fonctionne bien comme ca : on est partis du principe que W(x,y) = min(cout(x), Cout(x))
         			ly.setCout(Math.min(ly.getCout(), lx.getCout() + Math.min(ly.getCout(), lx.getCout()) ));
         			
-        			// Si y a été modifie
+        			// Si y a ete modifie
         			if (a != ly.getCout()) {
         				tas.insert(ly);
         				ly.setPrec(lx);
