@@ -9,10 +9,10 @@ public class Label {
 	
 	
 	public Label (Node noeud, Node prec, int cout, boolean marquage) {
-		this.noeud = noeud;
-		this.prec = prec;
-		this.cout = cout;
-		this.marquage = marquage;
+		this.noeud = noeud; //noeud courant
+		this.prec = prec; // noeud père
+		this.cout = cout; // valeur depuis l'origine j'ausqu'au noeud courant
+		this.marquage = marquage; // si coût min connu par l'algo
 	}
 	
 	public int getCout() {
@@ -41,5 +41,9 @@ public class Label {
 
 	public void setMarq(boolean marquage) {
 		this.marquage=marquage;
+	}
+	
+	public void setNoeud (Node noeud) {
+		this.noeud = noeud;
 	}
 }

@@ -3,6 +3,7 @@ package org.insa.algo.shortestpath;
 //Importation des classes dans la classe imoprté
 import org.insa.graph.*;
 import java.util.ArrayList;
+//import org.insa.algo.utils.BinaryHeap;
 
 public class DijkstraAlgorithm extends ShortestPathAlgorithm {
 
@@ -10,6 +11,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
 
     public DijkstraAlgorithm(ShortestPathData data) {
         super(data);
+        BinaryHeap<Label> tas = null;
         
         /* Initialisation
          * 
@@ -29,15 +31,49 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         }
         ListeLabels.get(0).setCout(0);
         //insertion du sommet source dans le tas
-        Insert(ListeLabels.get(0), Tas);
-
-        //Iteration
-        while (ParcoursMarq(ListeLabels) == false) {
-        	int x = findMin(Tas);
-        	ListeLabels.
-        	
-        	for (Label)
-        }
+        tas.insert(ListeLabels.get(0));
+        
+        /*			ITERATION
+         * 
+         * While il existe des sommets non marques
+         * 		x <- ExtractMin(tas)
+         * 		Mark(x) <- true
+         * 		For tous les y successeurs de x
+         * 			If not Mark(y) then
+         * 				Cost(y) <- Min(Cost(y), Cost(x)+W(x,y))	//W est le poids de l'arc allant de x a y
+         * 				If Cost(y) a ete mis a jour then
+         * 					Placer(y, tas)
+         * 					Father(y) <- x
+         * 				end if
+         * 			end if
+         * 		end for
+         * end while
+         */
+        
+        while (!ParcoursMarq(ListeLabels)) {
+        		
+       		// TODO: Trouver comment associer/definir le label d'un noeud (sans toucher a Node.java)
+       		Label lx = tas.findMin();
+       		lx.setMarq(true);
+       		
+        	for (Label ly : ListeLabels) {	// TODO: Prendre juste les successeurs de x, pas toute la liste
+        		if (ly.getMarq() == false) {
+        			
+        			// Mise en mémoire tampon de Cost(y) pour le test du prochain if
+        			int a = ly.getCout();
+        			
+        			// TODO: Verifier que l'algo fonctionne bien comme ca : on est partis du principe que W(x,y) = min(cout(x), Cout(x))
+        			ly.setCout(Math.min(ly.getCout(), lx.getCout() + Math.min(ly.getCout(), lx.getCout()) ));
+        			
+        			// Si y a été modifie
+        			if (a != ly.getCout()) {
+        				tas.insert(ly);
+        				ly.setPrec(lx);
+        			}
+        		}
+        	} // FIN FOR successeurs
+            
+        } // Fin ITERATION
         
     }
 
@@ -50,24 +86,6 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         }
        	return true;
      } 
-    
-    
-    /* Itéartion
-     * 
-     * While il existe des sommets non marqués
-     * 		x <- ExtractMin(Tas)
-     * 		Mark(x) <- true
-     * 		For tous les y successeurs de x
-     * 			If not Mark(y) then
-     * 				Cost(y) <- Min(Cost(y), Cost(x)+W(x,y))
-     * 				If Cost(y) a été mis à jour then
-     * 					Placer(y, Tas)
-     * 					Father(y) <- x
-     * 				end if
-     * 			end if
-     * 		end for
-     * end while
-     */
     
     
     @Override
