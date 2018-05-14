@@ -60,14 +60,20 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
          */
         
         while (!ParcoursMarq(ListeLabels)) {
-        		
-       		// TODO: Trouver comment associer/definir le label d'un noeud (sans toucher a Node.java)
-        	//Solution potentielle : Label implemente maintenant Comparable <Label>.
+        	
        		Label lx = tas.findMin();
        		lx.setMarq(true);
-
-       		// TODO: Prendre juste les successeurs de x, pas toute la liste
-        	for (Label ly : ListeLabels) {
+       		
+       		//On parcourt la liste de labels pour enregistrer ceux des points fils de x dans Successeursdex.
+       		ArrayList<Label> Successeursdex = new ArrayList<Label>();
+       		for (Label lk : ListeLabels) {
+       			if (lk.getNoeudPrec() == lx.getNoeud()) {
+       				Successeursdex.add(lk);
+       			}
+       		}
+       		
+       		//On parcourt la liste des labels des successeurs de x (obtenue ci-dessus).
+        	for (Label ly : Successeursdex) {
         		if (ly.getMarq() == false) {
         			
         			// Mise en memoire tampon de Cost(y) pour le test du prochain if
