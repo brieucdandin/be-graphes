@@ -1,13 +1,15 @@
 package org.insa.graph;
 
-public class Label {
+public class Label implements Comparable <Label> {
 
 	private Node noeud;
 	private Node Nprec;
 	private Arc Aprec;
 	private boolean marquage;
 	private int cout;
+
 	
+
 	
 
 	public Label (Node noeud, Node Nprec, Arc Aprec, int cout, boolean marquage) {
@@ -19,11 +21,13 @@ public class Label {
 	}
 
 	/*public Label (Node noeud, Label prec, int cout, boolean marquage) {
+	public Label (Node noeud, Label prec, int cout, boolean marquage) {
 		this.noeud = noeud;
 		this.prec = prec;
 		this.cout = cout;
 		this.marquage = marquage;
 	}*/
+
 	
 	public int getCout() {
 		return this.cout;
@@ -63,5 +67,13 @@ public class Label {
 	
 	public void setNoeud (Node noeud) {
 		this.noeud = noeud;
+	}
+
+	@Override
+	//Algo renvoyant >0 (resp. < ou =) si supérieur (resp. in. ou egal) a other.
+	public int compareTo(Label other) {
+		if (this.getNoeud().getId() > other.getNoeud().getId()) {return 1;}
+		else if (this.getNoeud().getId() > other.getNoeud().getId()) {return 0;}
+		else {return -1;}
 	}
 }

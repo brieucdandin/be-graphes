@@ -1,7 +1,5 @@
 package org.insa.algo.shortestpath;
 
-import org.insa.algo.utils.BinaryHeap;
-//Importation des classes dans la classe imoprtee
 import org.insa.graph.*;
 import java.util.ArrayList;
 
@@ -14,6 +12,13 @@ import org.insa.graph.Node;
 import org.insa.graph.Path;
 */
 
+import org.insa.algo.utils.BinaryHeap;
+/*
+ * import org.insa.graph.Arc;
+ * import org.insa.graph.Graph;
+ * import org.insa.graph.Node;
+ * import org.insa.graph.Path;
+ */
 
 public class DijkstraAlgorithm extends ShortestPathAlgorithm {
 
@@ -22,7 +27,6 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
     public DijkstraAlgorithm(ShortestPathData data) {
         super(data);
         ArrayList<Label> tas = new ArrayList<Label>();
-        BinaryHeap<tas> ListLab = new BinaryHeap();
                 
         /*			INITIALISATION
          * 
@@ -90,7 +94,8 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         //Insertion du sommet source dans le tas
         tas.insert(ListeLabels.get(0));
 
-        
+        //Insertion du sommet source dans le tas
+        tas.insert(ListeLabels.get(0));
         
         /*			ITERATION
          * 
@@ -114,8 +119,9 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
        		// TODO: Trouver comment associer/definir le label d'un noeud (sans toucher a Node.java)
        		Label lx = tas.findMin();
        		lx.setMarq(true);
-       		
-        	for (Label ly : ListeLabels) {	// TODO: Prendre juste les successeurs de x, pas toute la liste
+
+       		// TODO: Prendre juste les successeurs de x, pas toute la liste
+        	for (Label ly : ListeLabels) {
         		if (ly.getMarq() == false) {
         			
         			// Mise en memoire tampon de Cost(y) pour le test du prochain if
@@ -127,7 +133,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         			// Si y a ete modifie
         			if (a != ly.getCout()) {
         				tas.insert(ly);
-        				ly.setPrec(lx);
+        				ly.setNoeudPrec(lx);
         			}
         		}
         	} // FIN FOR successeurs
@@ -147,10 +153,9 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         	}
         }
        	return true;
-     } 
+     }
     
     
-
     @Override
     protected ShortestPathSolution doRun() {
         ShortestPathData data = getInputData();
