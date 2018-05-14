@@ -31,15 +31,14 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
          * Insert(s, tas)
          */
         
-        for(Label l: ListeLabels) {
-        	l.setMarq(false);
-        	l.setCout(999999);
-        	l.setNoeudPrec(null);
+        for(Node n: data.getGraph()) {
+        	Label l = new Label(n, null, null, Double.POSITIVE_INFINITY, false);
+        	ListeLabels.add(l);
         }
         ListeLabels.get(0).setCout(0);
 
         //Insertion du sommet source dans le tas
-        tas.insert(ListeLabels.get(0));
+        tas.insert(ListeLabels.get(0));	//TODO: Erreur ici ! Cf. warning
         
         
         /**			ITERATION
@@ -77,7 +76,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         		if (ly.getMarq() == false) {
         			
         			// Mise en memoire tampon de Cost(y) pour le test du prochain if
-        			int a = ly.getCout();
+        			double a = ly.getCout();
         			
         			// TODO: Verifier que l'algo fonctionne bien comme ca : on est partis du principe que W(x,y) = min(cout(x), Cout(x))
         			ly.setCout(Math.min(ly.getCout(), lx.getCout() + Math.min(ly.getCout(), lx.getCout()) ));

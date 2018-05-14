@@ -3,21 +3,21 @@ package org.insa.graph;
 public class Label implements Comparable <Label> {
 
 	private Node noeud;
-	private Node Nprec;
-	private Arc Aprec;
+	private Node noeudPrec;
+	private Arc arcPrec;
 	private boolean marquage;
-	private int cout;
+	private double cout;
 
 	
 
 	
 
-	public Label (Node noeud, Node Nprec, Arc Aprec, int cout, boolean marquage) {
-		this.noeud = noeud; //noeud courant
-		this.Nprec = Nprec; // noeud père
-		this.Aprec = Aprec; // arc père
-		this.cout = cout; // valeur depuis l'origine j'ausqu'au noeud courant
-		this.marquage = marquage; // si coût min connu par l'algo
+	public Label (Node noeud, Node noeudPrec, Arc arcPrec, double cout, boolean marquage) {
+		this.noeud = noeud; 		// Noeud courant
+		this.noeudPrec = noeudPrec;	// Noeud pere
+		this.arcPrec = arcPrec;		// Arc pere
+		this.cout = cout;			// Valeur depuis l'origine jusqu'au noeud courant
+		this.marquage = marquage;	// Si cout min connu par l'algo
 	}
 
 	/*public Label (Node noeud, Label prec, int cout, boolean marquage) {
@@ -29,7 +29,7 @@ public class Label implements Comparable <Label> {
 	}*/
 
 	
-	public int getCout() {
+	public double getCout() {
 		return this.cout;
 	}
 	
@@ -38,27 +38,27 @@ public class Label implements Comparable <Label> {
 	}
 	
 	public Node getNoeudPrec() {
-		return this.Nprec;
+		return this.noeudPrec;
 	}
 	
 	public Arc getArcPrec() {
-		return this.Aprec;
+		return this.arcPrec;
 	}
 	
 	public boolean getMarq() {
 		return this.marquage;
 	}
 	
-	public void setCout(int cout) {
+	public void setCout(double cout) {
 		this.cout=cout;
 	}
 	
-	public void setNoeudPrec(Node Nprec) {
-		this.Nprec=Nprec;
+	public void setNoeudPrec(Node noeudPrec) {
+		this.noeudPrec=noeudPrec;
 	}
 	
-	public void setArcPrec(Arc Aprec) {
-		this.Aprec=Aprec;
+	public void setArcPrec(Arc arcPrec) {
+		this.arcPrec=arcPrec;
 	}
 
 	public void setMarq(boolean marquage) {
