@@ -19,7 +19,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         BinaryHeap<Label> tas = null;
         
         
-        /*			INITIALISATION
+        /**			INITIALISATION
          * 
          * For tous les sommets i  de 1 a n
          * 		Mark(i) <- Faux
@@ -41,7 +41,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         tas.insert(ListeLabels.get(0));
         
         
-        /*			ITERATION
+        /**			ITERATION
          * 
          * While il existe des sommets non marques
          * 		x <- ExtractMin(tas)
@@ -61,6 +61,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         while (!ParcoursMarq(ListeLabels)) {
         		
        		// TODO: Trouver comment associer/definir le label d'un noeud (sans toucher a Node.java)
+        	//Solution potentielle : Label implemente maintenant Comparable <Label>.
        		Label lx = tas.findMin();
        		lx.setMarq(true);
 
@@ -87,7 +88,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
     } // Fin constructeur
 
     
-	/*
+	/**
 	 * Parcours pour savoir si les labels ont ete marques
 	 */
     public boolean ParcoursMarq(ArrayList<Label> Lab){
