@@ -6,21 +6,13 @@ public class Label implements Comparable <Label> {
 	private Label prec;
 	private boolean marquage;
 	private int cout;
+
 	
-	
-<<<<<<< HEAD
-	public Label (Node noeud, Node prec, int cout, boolean marquage) {
-		this.noeud = noeud; //noeud courant
-		this.prec = prec; // noeud père
-		this.cout = cout; // valeur depuis l'origine j'ausqu'au noeud courant
-		this.marquage = marquage; // si coût min connu par l'algo
-=======
 	public Label (Node noeud, Label prec, int cout, boolean marquage) {
 		this.noeud = noeud;
 		this.prec = prec;
 		this.cout = cout;
 		this.marquage = marquage;
->>>>>>> 05c9d5a97f3e0458950d88a5ea4e25b28dfe36fb
 	}
 	
 	public int getCout() {
