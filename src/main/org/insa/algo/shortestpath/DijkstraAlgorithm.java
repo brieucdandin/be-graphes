@@ -2,6 +2,7 @@ package org.insa.algo.shortestpath;
 
 import org.insa.graph.*;
 import java.util.ArrayList;
+
 import org.insa.algo.utils.BinaryHeap;
 /*
  * import org.insa.graph.Arc;
@@ -33,7 +34,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         for(Label l: ListeLabels) {
         	l.setMarq(false);
         	l.setCout(999999);
-        	l.setPrec(null);
+        	l.setNoeudPrec(null);
         }
         ListeLabels.get(0).setCout(0);
 
@@ -78,7 +79,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         			// Si y a ete modifie
         			if (a != ly.getCout()) {
         				tas.insert(ly);
-        				ly.setPrec(lx);
+        				ly.setNoeudPrec(lx.getNoeud());
         			}
         		}
         	} // FIN FOR successeurs
@@ -99,7 +100,6 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         }
        	return true;
      }
-    
     
     
     @Override
