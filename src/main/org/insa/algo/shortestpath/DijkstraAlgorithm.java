@@ -64,8 +64,9 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
        		// TODO: Trouver comment associer/definir le label d'un noeud (sans toucher a Node.java)
        		Label lx = tas.findMin();
        		lx.setMarq(true);
-       		
-        	for (Label ly : ListeLabels) {	// TODO: Prendre juste les successeurs de x, pas toute la liste
+
+       		// TODO: Prendre juste les successeurs de x, pas toute la liste
+        	for (Label ly : ListeLabels) {
         		if (ly.getMarq() == false) {
         			
         			// Mise en memoire tampon de Cost(y) pour le test du prochain if

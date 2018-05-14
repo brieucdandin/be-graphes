@@ -1,6 +1,6 @@
 package org.insa.graph;
 
-public class Label {
+public class Label implements Comparable <Label> {
 
 	private Node noeud;
 	private Label prec;
@@ -45,5 +45,13 @@ public class Label {
 	
 	public void setNoeud (Node noeud) {
 		this.noeud = noeud;
+	}
+
+	@Override
+	//Algo renvoyant >0 (resp. < ou =) si supérieur (resp. in. ou egal) a other.
+	public int compareTo(Label other) {
+		if (this.getNoeud().getId() > other.getNoeud().getId()) {return 1;}
+		else if (this.getNoeud().getId() > other.getNoeud().getId()) {return 0;}
+		else {return -1;}
 	}
 }
