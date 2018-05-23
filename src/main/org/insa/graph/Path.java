@@ -38,10 +38,10 @@ public class Path {
     	if (nodes.size()==1) {
     		return new Path(graph,nodes.get(0));
     	}	
-        List<Arc> arcs = new ArrayList<Arc>(); //path final
+        List<Arc> arcs = new ArrayList<Arc>(); //Path final
         ListIterator<Node> itnodes = nodes.listIterator();
         Arc arctemp;
-        Arc plusRap = null; //arc actuellement le plus court dans iteration arcs
+        Arc plusRap = null;	//Arc actuellement le plus court dans iteration arcs
         Node n;
         Node prevNode = null;
         
@@ -131,7 +131,8 @@ public class Path {
         }
 
         return new Path(graph, arcs);
-    	
+
+        //TODO: Enlever si pas necessaire
     /*	if (nodes.size()==0) {
     		return new Path(graph);
     	}
@@ -181,7 +182,8 @@ public class Path {
         */
        
     }    	
-    	
+
+    //TODO: Enlever si pas necessaire
     /*	if (nodes.size()==0) {
     		return new Path(graph);
     	}
@@ -229,46 +231,9 @@ public class Path {
         }
         
         return new Path(graph, arcs);
-=======
-    		throws IllegalArgumentException {
-  	  // Unique node case
-      if (nodes.size() == 1) {
-          return new Path(graph, nodes.get(0));
-      }
-
-      List<Arc> arcs = new ArrayList<Arc>();
-
-      int i = 0;
-      while (i < (nodes.size() - 1)){
-          boolean connected = false;
-          double fastest_time = MAX_VALUE;
-          Arc arc_to_add = null;
-          for (Arc arc : nodes.get(i)) {
-              if (arc.getDestination().equals(nodes.get(i + 1))) {
-                  connected = true;
-                  double min_time = arc.getMinimumTravelTime();
-                  if (min_time < fastest_time) {
-                      fastest_time = min_time;
-                      arc_to_add = arc;
-                  }
-              }
-          }
-
-          // Two consecutive nodes are not connected
-          if (!connected){
-              throw  new IllegalArgumentException("All nodes are not connected.");
-          }
-          // Add the fastest to the list
-          else {
-              arcs.add(arc_to_add);
-          }
-          i++;
-      }
-
-      return new Path(graph, arcs);
->>>>>>> e4d6458e255f522c949f26dd428c0f949cf2e68c
     }
 	*/
+    
     /**
      * Concatenate the given paths.
      * 
@@ -343,7 +308,7 @@ public class Path {
         this.arcs = new ArrayList<>();
     }
 
-    /*
+    /**
      * Create a new path containing two nodes.
      * 
      * @param graph Graph containing the path.
@@ -356,8 +321,7 @@ public class Path {
        this.destination = destination;
        this.arcs = new ArrayList<>();
    }
-    
-    
+
     /**
      * Create a new path with the given list of arcs.
      * 
@@ -432,18 +396,13 @@ public class Path {
      * @return true if the path is valid, false otherwise.
      */
     public boolean isValid() {
-    	if (arcs == null) {
-    		return true;
-    	}
+    	if (arcs == null) {return true;}
     	
     	Node node = this.origin;
-    	  	
     	for (Arc arc : this.arcs) {
-            	if (arc.getOrigin() !=node) {
-            		return false;
-            	}
+    		if (arc.getOrigin() !=node) {return false;            	}
             node=arc.getDestination();
-    	  	}
+    	}
         return true;
     }
 
@@ -453,9 +412,9 @@ public class Path {
      * @return Total length of the path (in meters).
      */
     public float getLength() {
-    	float lenght =0;
-    	for (Arc arcs  : this.arcs) {
-			lenght = lenght + arcs.getLength();
+    	float lenght = 0;
+    	for (Arc arcs : this.arcs) {
+			lenght += arcs.getLength();
 		}
         return lenght;
     }

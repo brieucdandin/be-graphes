@@ -12,7 +12,7 @@ public class Label implements Comparable <Label> {
 	public Label (Node noeud, Node noeudPrec, Arc arcPrec, double cout, boolean marquage) {
 		this.noeud = noeud; 		// Noeud courant
 		this.noeudPrec = noeudPrec;	// Noeud pere
-//		this.arcPrec = arcPrec;		// Arc pere
+//		this.arcPrec = arcPrec;		// Arc pere	//TODO: A enlever si pas necessaire
 		this.cout = cout;			// Valeur depuis l'origine jusqu'au noeud courant
 		this.marquage = marquage;	// Si cout min connu par l'algo
 	}
