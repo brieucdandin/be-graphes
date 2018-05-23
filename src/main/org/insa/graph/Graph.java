@@ -26,6 +26,7 @@ public final class Graph implements Iterable<Node> {
     // Graph information of this graph.
     private final GraphStatistics graphStatistics;
 
+
     /**
      * Create a new graph with the given ID, name, nodes and information.
      * 
@@ -115,4 +116,8 @@ public final class Graph implements Iterable<Node> {
         return new Graph("R/" + mapId, mapName, trNodes, graphStatistics);
     }
 
+
+    public List<Node> getNoeuds() {
+    	return nodes;
+    }
 }

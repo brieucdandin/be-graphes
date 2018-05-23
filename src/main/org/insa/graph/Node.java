@@ -107,6 +107,14 @@ public final class Node implements Comparable<Node>, Iterable<Arc> {
         return !this.successors.isEmpty();
     }
 
+    /**
+     * @return Successors of this node.
+     */
+    public ArrayList<Arc> getSuccessors() {
+        return this.successors;
+    }
+
+    
     @Override
     public Iterator<Arc> iterator() {
         return Collections.unmodifiableList(this.successors).iterator();

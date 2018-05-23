@@ -4,31 +4,20 @@ public class Label implements Comparable <Label> {
 
 	private Node noeud;
 	private Node noeudPrec;
-	private Arc arcPrec;
+//	private Arc arcPrec;
 	private boolean marquage;
 	private double cout;
 
-	
 
-	
 
 	public Label (Node noeud, Node noeudPrec, Arc arcPrec, double cout, boolean marquage) {
 		this.noeud = noeud; 		// Noeud courant
 		this.noeudPrec = noeudPrec;	// Noeud pere
-		this.arcPrec = arcPrec;		// Arc pere
+//		this.arcPrec = arcPrec;		// Arc pere
 		this.cout = cout;			// Valeur depuis l'origine jusqu'au noeud courant
 		this.marquage = marquage;	// Si cout min connu par l'algo
 	}
 
-	/*public Label (Node noeud, Label prec, int cout, boolean marquage) {
-	public Label (Node noeud, Label prec, int cout, boolean marquage) {
-		this.noeud = noeud;
-		this.prec = prec;
-		this.cout = cout;
-		this.marquage = marquage;
-	}*/
-
-	
 	public double getCout() {
 		return this.cout;
 	}
@@ -41,9 +30,9 @@ public class Label implements Comparable <Label> {
 		return this.noeudPrec;
 	}
 	
-	public Arc getArcPrec() {
-		return this.arcPrec;
-	}
+//	public Arc getArcPrec() {
+//		return this.arcPrec;
+//	}
 	
 	public boolean getMarq() {
 		return this.marquage;
@@ -57,9 +46,9 @@ public class Label implements Comparable <Label> {
 		this.noeudPrec=noeudPrec;
 	}
 	
-	public void setArcPrec(Arc arcPrec) {
-		this.arcPrec=arcPrec;
-	}
+//	public void setArcPrec(Arc arcPrec) {
+//		this.arcPrec=arcPrec;
+//	}
 
 	public void setMarq(boolean marquage) {
 		this.marquage=marquage;
