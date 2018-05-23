@@ -2,7 +2,12 @@ package org.insa.graph;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
+<<<<<<< HEAD
+=======
+import java.util.ListIterator;
+>>>>>>> e4d6458e255f522c949f26dd428c0f949cf2e68c
 import java.util.*;
 import static java.lang.Double.MAX_VALUE;
 import static java.lang.Double.MAX_VALUE;
@@ -31,7 +36,11 @@ public class Path {
      * 
      */
     public static Path createFastestPathFromNodes(Graph graph, List<Node> nodes)
+<<<<<<< HEAD
             throws IllegalArgumentException {
+=======
+throws IllegalArgumentException {
+>>>>>>> e4d6458e255f522c949f26dd428c0f949cf2e68c
     	
     	if (nodes.size()==0) {
     		return new Path(graph);
@@ -78,8 +87,11 @@ public class Path {
         }
         
         return new Path(graph, arcs);
+<<<<<<< HEAD
         
        
+=======
+>>>>>>> e4d6458e255f522c949f26dd428c0f949cf2e68c
     }
 
     /**
@@ -96,6 +108,7 @@ public class Path {
      * 
      */ 
     public static Path createShortestPathFromNodes(Graph graph, List<Node> nodes)
+<<<<<<< HEAD
             throws IllegalArgumentException {
     	
     	
@@ -232,6 +245,44 @@ public class Path {
         }
         
         return new Path(graph, arcs);
+=======
+    		throws IllegalArgumentException {
+  	  // Unique node case
+      if (nodes.size() == 1) {
+          return new Path(graph, nodes.get(0));
+      }
+
+      List<Arc> arcs = new ArrayList<Arc>();
+
+      int i = 0;
+      while (i < (nodes.size() - 1)){
+          boolean connected = false;
+          double fastest_time = MAX_VALUE;
+          Arc arc_to_add = null;
+          for (Arc arc : nodes.get(i)) {
+              if (arc.getDestination().equals(nodes.get(i + 1))) {
+                  connected = true;
+                  double min_time = arc.getMinimumTravelTime();
+                  if (min_time < fastest_time) {
+                      fastest_time = min_time;
+                      arc_to_add = arc;
+                  }
+              }
+          }
+
+          // Two consecutive nodes are not connected
+          if (!connected){
+              throw  new IllegalArgumentException("All nodes are not connected.");
+          }
+          // Add the fastest to the list
+          else {
+              arcs.add(arc_to_add);
+          }
+          i++;
+      }
+
+      return new Path(graph, arcs);
+>>>>>>> e4d6458e255f522c949f26dd428c0f949cf2e68c
     }
 	*/
     /**
@@ -397,7 +448,10 @@ public class Path {
      * @return true if the path is valid, false otherwise.
      */
     public boolean isValid() {
+<<<<<<< HEAD
     	
+=======
+>>>>>>> e4d6458e255f522c949f26dd428c0f949cf2e68c
     	if (arcs == null) {
     		return true;
     	}
@@ -445,11 +499,19 @@ public class Path {
      * @return Minimum travel time to travel this path (in seconds).
      */
     public double getMinimumTravelTime() {
+<<<<<<< HEAD
         double duree =0;
         for (Arc arc : this.arcs) {
         	duree = duree + arc.getMinimumTravelTime();
         	}
         return duree;
+=======
+    	double minTravelTime = 0;
+        for (Arc arc : this.arcs){
+    		minTravelTime += arc.getMinimumTravelTime();
+        }
+        return minTravelTime;
+>>>>>>> e4d6458e255f522c949f26dd428c0f949cf2e68c
     }
 
 }
