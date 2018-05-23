@@ -4,14 +4,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-<<<<<<< HEAD
-=======
 import java.util.ListIterator;
->>>>>>> e4d6458e255f522c949f26dd428c0f949cf2e68c
-import java.util.*;
 import static java.lang.Double.MAX_VALUE;
-import static java.lang.Double.MAX_VALUE;
-import static java.lang.Double.MAX_VALUE;
+
 
 /**
  * Class representing a path between nodes in a graph.
@@ -36,12 +31,7 @@ public class Path {
      * 
      */
     public static Path createFastestPathFromNodes(Graph graph, List<Node> nodes)
-<<<<<<< HEAD
-            throws IllegalArgumentException {
-=======
-throws IllegalArgumentException {
->>>>>>> e4d6458e255f522c949f26dd428c0f949cf2e68c
-    	
+    		throws IllegalArgumentException {
     	if (nodes.size()==0) {
     		return new Path(graph);
     	}
@@ -87,12 +77,7 @@ throws IllegalArgumentException {
         }
         
         return new Path(graph, arcs);
-<<<<<<< HEAD
-        
-       
-=======
->>>>>>> e4d6458e255f522c949f26dd428c0f949cf2e68c
-    }
+}
 
     /**
      * Create a new path that goes through the given list of nodes (in order),
@@ -108,8 +93,7 @@ throws IllegalArgumentException {
      * 
      */ 
     public static Path createShortestPathFromNodes(Graph graph, List<Node> nodes)
-<<<<<<< HEAD
-            throws IllegalArgumentException {
+    			throws IllegalArgumentException {
     	
     	
     	  // Unique node case
@@ -448,10 +432,6 @@ throws IllegalArgumentException {
      * @return true if the path is valid, false otherwise.
      */
     public boolean isValid() {
-<<<<<<< HEAD
-    	
-=======
->>>>>>> e4d6458e255f522c949f26dd428c0f949cf2e68c
     	if (arcs == null) {
     		return true;
     	}
@@ -499,19 +479,11 @@ throws IllegalArgumentException {
      * @return Minimum travel time to travel this path (in seconds).
      */
     public double getMinimumTravelTime() {
-<<<<<<< HEAD
-        double duree =0;
-        for (Arc arc : this.arcs) {
-        	duree = duree + arc.getMinimumTravelTime();
-        	}
-        return duree;
-=======
     	double minTravelTime = 0;
         for (Arc arc : this.arcs){
     		minTravelTime += arc.getMinimumTravelTime();
         }
         return minTravelTime;
->>>>>>> e4d6458e255f522c949f26dd428c0f949cf2e68c
     }
 
 }

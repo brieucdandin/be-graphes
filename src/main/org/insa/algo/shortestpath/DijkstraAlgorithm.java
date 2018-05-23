@@ -2,6 +2,7 @@ package org.insa.algo.shortestpath;
 
 import org.insa.graph.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.insa.algo.utils.BinaryHeap;
 
@@ -13,23 +14,22 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
 	
 //	protected int zoneOrigine;
     protected int idOrigine;
-//
+
 //    protected int zoneDestination;
     protected int idDestination;
-//
-//    protected HashMap<Noeud, Label> labelNoeud;
-//    protected BinaryHeap<Label> tas;
+
+    protected HashMap<Node, Label> labelNoeud;
+    protected BinaryHeap<Label> tas;
     protected Graph graphe;
-//
+
 //    protected Chemin chemin_result;
-//
+
 //    protected int mode;
 
 
     public DijkstraAlgorithm(ShortestPathData data) {
         super(data);
-        BinaryHeap<Label> tas = null;
-        
+
         
         /**			INITIALISATION
          * 
@@ -85,13 +85,13 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
          */
         
         
-        boolean destinationAtteinte = false;
+        boolean DestinationAtteinte = false;
 
-        // Pour les statistiques
-        stats.start_counter();
-        int taille_tas = 1; // pour eviter de demander la taille du tas à chaque tour
-        int max_taille = taille_tas;
-        int elts_marques = 0;
+//        // Pour les statistiques
+//        stats.start_counter();
+        int TailleTas = 1;	//Permet de ne pas avoir a demander la taille du tas a chaque iteration
+        int TailleMax = TailleTas;
+        int ElementsMarques = 0;
 
         
         boolean compareTemps;
@@ -100,15 +100,15 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         while (!tas.isEmpty()) {
             // On récupere le plus petit element du tas pour le traiter
             Node x = tas.deleteMin().getNoeud();
-            taille_tas--;
+            TailleTas--;
 
-//            labelNoeud.get(x).setMarquage(true);	//TODO: hashmap a creer
-            elts_marques++;
-            //x.dessine(d); // laisser x...
+            labelNoeud.get(x).setMarq(true);
+            ElementsMarques++;
+//            x.dessine(d); // laisser x...
 
-            // Si on traite le sommet là on est bon
+            //Fin si la destination est atteinte
             if (x.getId() == this.idDestination) {
-                destinationAtteinte = true;
+            	DestinationAtteinte = true;
                 break;
             }
 
@@ -117,40 +117,38 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
                 Node dest = a.getDestination();
 
                 //On recupere son label
-                Label dLabel = labelNoeud.get(dest);
+                Label LabelDestination = labelNoeud.get(dest);
 
-                //S'il est pas deja marque on le traite
-                if (!dLabel.getMarq()) {
+                //Traitement des sommets non-marques
+                if (!LabelDestination.getMarq()) {
 
-                    compareTemps = dLabel.getCout() > labelNoeud.get(x).getCout() + a.getTravelTime() && this.mode == PlusCourtChemin.MODE_TEMPS;
-                    compareDistance = dLabel.getCout() > labelNoeud.get(x).getCout() + a.getTravelTime() * a.getDescripteur().vitesseMax() * 1000 / 60 && (this.mode == PlusCourtChemin.MODE_DISTANCE);
+                    compareTemps = LabelDestination.getCout() > labelNoeud.get(x).getCout() + a.getTravelTime() && this.mode == PlusCourtChemin.MODE_TEMPS;
+                    compareDistance = LabelDestination.getCout() > labelNoeud.get(x).getCout() + a.getTravelTime() * a.getDescripteur().vitesseMax() * 1000 / 60 && (this.mode == PlusCourtChemin.MODE_DISTANCE);
 
 
-                    // Si son cout actuel est plus grand que le cout depuis x alors on maj
+                    //Si le out est plus petit, on l'update
                     if (compareTemps || compareDistance) {
                         if (compareTemps) {
-                            dLabel.setCout(labelNoeud.get(x).getCout() + a.getTravelTime());
+                        	LabelDestination.setCout(labelNoeud.get(x).getCout() + a.getTravelTime());
                         } else {
-                            dLabel.setCout(labelNoeud.get(x).getCout() + a.getTravelTime() * a.getDescripteur().vitesseMax() * 1000 / 60);
+                        	LabelDestination.setCout(labelNoeud.get(x).getCout() + a.getTravelTime() * a.getDescripteur().vitesseMax() * 1000 / 60);
                         }
 
                         //TODO: Utiliser les methodes de BinaryHeap
-                        if (tas.exist(dLabel)) {
-                            dLabel.setPere(x);
-                            tas.update(dLabel);
+                        if (tas.exist(LabelDestination)) {
+                        	LabelDestination.setPere(x);
+                            tas.update(LabelDestination);
                         } else {
-                            dLabel.setPere(x);
-                            tas.insert(dLabel);
-                            taille_tas++;
+                        	LabelDestination.setPere(x);
+                            tas.insert(LabelDestination);
+                            TailleTas++;
                         }
                     }
-
                 }
-
             }
 
-            if (taille_tas > max_taille) {
-                max_taille = taille_tas;
+            if (TailleTas > TailleMax) {
+            	TailleMax = TailleTas;
             }
         }
 
@@ -160,7 +158,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
 //        stats.stop_counter();
 
         // On recupere le chemin si on atteint le sommet
-        if (destinationAtteinte) {
+        if (DestinationAtteinte) {
 
             Label noeud_courant = labelNoeud.get(this.graphe.getNoeudById(this.destination));
 
