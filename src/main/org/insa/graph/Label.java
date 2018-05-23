@@ -7,6 +7,13 @@ public class Label implements Comparable <Label> {
 	private Arc arcPrec;
 	private boolean marquage;
 	private double cout;
+	
+	/*
+	 * private Node noeud;
+	 * private double cout;
+	 * private boolean marquage;
+	 * private Node noeudPrec;
+	*/
 
 	
 

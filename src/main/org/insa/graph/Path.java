@@ -3,7 +3,13 @@ package org.insa.graph;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
+import java.util.*;
+import static java.lang.Double.MAX_VALUE;
+import static java.lang.Double.MAX_VALUE;
+import static java.lang.Double.MAX_VALUE;
 
 /**
  * Class representing a path between nodes in a graph.
@@ -28,26 +34,53 @@ public class Path {
      *
      */
     public static Path createFastestPathFromNodes(Graph graph, List<Node> nodes)
-            throws IllegalArgumentException {
-        List<Arc> arcsSelectionnes = new ArrayList<Arc>();
-        for (int k=0; k<nodes.size()-1; k++) {
-    		Arc arcDeTailleMin = null;
-    		boolean test = false;
-    		for (Arc it : nodes.get(k)) {
-    		//ou " Iterator<Arc> it = nodes.get(k).iterator(); it.hasNext() "
-    			if (it.getDestination() == nodes.get(k+1)) {
-    				test = true;
-    				if ( arcDeTailleMin == null || it.getMinimumTravelTime() < arcDeTailleMin.getMinimumTravelTime() ) {
-    					arcDeTailleMin = it;
-    				}
-    			}
-    			if (test == false) {
-        			throw new IllegalArgumentException();
-        		}
-    			arcsSelectionnes.add(k, arcDeTailleMin);
-    		}
+throws IllegalArgumentException {
+    	
+    	if (nodes.size()==0) {
+    		return new Path(graph);
     	}
-        return new Path(graph, arcsSelectionnes);
+    	if (nodes.size()==1) {
+    		return new Path(graph,nodes.get(0));
+    	}	
+        List<Arc> arcs = new ArrayList<Arc>(); //path final
+        ListIterator<Node> itnodes = nodes.listIterator();
+        Arc arctemp;
+        Arc plusRap = null; //arc actuellement le plus court dans iteration arcs
+        Node n;
+        Node prevNode = null;
+        
+        if (itnodes.hasNext()){
+        	prevNode= itnodes.next();
+        }
+       
+        
+        while(itnodes.hasNext()){ //iterations Nodes de nodes
+        	n = itnodes.next();
+        	Iterator<Arc> itarc = prevNode.iterator();
+        	double duree =0;
+        	boolean found = false; //si pas trouve, exception
+        	 
+        	while (itarc.hasNext()){ //iteration arcs successeurs de n
+        		arctemp = itarc.next();
+        		if (arctemp.getDestination() == n && (arctemp.getMinimumTravelTime()<duree || found == false)){
+        			plusRap = arctemp;
+        			duree = plusRap.getMinimumTravelTime();
+        			found = true;
+        			//ON TESTE SI PLUS COURT QUE LES AUTRES ET STOCKE
+        			//MET found A TRUE
+        		}
+        		
+        	}
+        	if (found) {
+        	arcs.add(plusRap);
+        	prevNode = n;
+        	}
+        	else {
+        		throw new IllegalArgumentException();
+        	}
+        }
+        
+        return new Path(graph, arcs);
     }
 
     /**
@@ -64,26 +97,42 @@ public class Path {
      *
      */
     public static Path createShortestPathFromNodes(Graph graph, List<Node> nodes)
-            throws IllegalArgumentException {
-    	List<Arc> arcsSelectionnes = new ArrayList<Arc>();
-        for (int k=0; k<nodes.size()-1; k++) {
-    		Arc arcDeTailleMin = null;
-    		boolean test = false;	
-    		for (Arc it : nodes.get(k)) {
-    		//ou " Iterator<Arc> it = nodes.get(k).iterator(); it.hasNext() "
-    			if (it.getDestination() == nodes.get(k+1)) {
-    				test = true;
-    				if ( arcDeTailleMin == null || it.getLength() < arcDeTailleMin.getLength() ) {
-    					arcDeTailleMin = it;
-    				}
-    			}
-    			if (test == false) {
-        			throw new IllegalArgumentException();
-        		}
-    			arcsSelectionnes.add(k, arcDeTailleMin);
-    		}
-    	}
-        return new Path(graph, arcsSelectionnes);
+    		throws IllegalArgumentException {
+  	  // Unique node case
+      if (nodes.size() == 1) {
+          return new Path(graph, nodes.get(0));
+      }
+
+      List<Arc> arcs = new ArrayList<Arc>();
+
+      int i = 0;
+      while (i < (nodes.size() - 1)){
+          boolean connected = false;
+          double fastest_time = MAX_VALUE;
+          Arc arc_to_add = null;
+          for (Arc arc : nodes.get(i)) {
+              if (arc.getDestination().equals(nodes.get(i + 1))) {
+                  connected = true;
+                  double min_time = arc.getMinimumTravelTime();
+                  if (min_time < fastest_time) {
+                      fastest_time = min_time;
+                      arc_to_add = arc;
+                  }
+              }
+          }
+
+          // Two consecutive nodes are not connected
+          if (!connected){
+              throw  new IllegalArgumentException("All nodes are not connected.");
+          }
+          // Add the fastest to the list
+          else {
+              arcs.add(arc_to_add);
+          }
+          i++;
+      }
+
+      return new Path(graph, arcs);
     }
 
     /**
@@ -226,21 +275,19 @@ public class Path {
      * 
      */
     public boolean isValid() {
-        boolean b = true;
-    	if (this.isEmpty() || this.getArcs().isEmpty() ) {
-    		return b;
+    	if (arcs == null) {
+    		return true;
     	}
-    	else if (this.getArcs().get(0).getOrigin() == this.getOrigin() ) {
-        	int k = 1;
-            while (b=true && k<this.getArcs().size()-1) {
-            	if (this.getArcs().get(k).getDestination() != this.getArcs().get(k+1).getOrigin() ) {
-            		b=false;	
+    	
+    	Node node = this.origin;
+    	  	
+    	for (Arc arc : this.arcs) {
+            	if (arc.getOrigin() !=node) {
+            		return false;
             	}
-            	k++;
-            }
-    	}
-    	else { b=false; }
-		return b;
+            node=arc.getDestination();
+    	  	}
+        return true;
     }
 
     /**
@@ -279,10 +326,9 @@ public class Path {
      *
      */
     public double getMinimumTravelTime() {
-    	int i;
     	double minTravelTime = 0;
-        for (i=0; i < this.arcs.size(); i++) {
-    		minTravelTime += (getLength() * 3600.0 / this.arcs.get(i).getMinimumTravelTime() * 1000.0);
+        for (Arc arc : this.arcs){
+    		minTravelTime += arc.getMinimumTravelTime();
         }
         return minTravelTime;
     }
