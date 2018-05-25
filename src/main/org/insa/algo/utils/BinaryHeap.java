@@ -12,7 +12,7 @@ package org.insa.algo.utils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
+
 
 /**
  * Implements a binary heap. Note that all "matching" is based on the compareTo
@@ -23,18 +23,11 @@ import java.util.Iterator;
  */
 public class BinaryHeap<E extends Comparable<E>> implements PriorityQueue<E> {
 
-<<<<<<< HEAD
 
     private HashMap<E, Integer> map;
     // Number of elements in heap.
     private int currentSize;
-	
-=======
-    private HashMap<E, Integer> map;
-    // Number of elements in heap.
-    private int currentSize;
 
->>>>>>> 09d89902fed74077a58c3d82abf6b4678bb2fbcb
 	// The heap array.
     private final ArrayList<E> array;
 
@@ -246,10 +239,6 @@ public class BinaryHeap<E extends Comparable<E>> implements PriorityQueue<E> {
         System.out.println();
     }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 09d89902fed74077a58c3d82abf6b4678bb2fbcb
 	/**
 	 * Check if an element is in the heap.
 	 * @param value
