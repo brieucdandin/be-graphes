@@ -162,11 +162,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
 
             Label noeud_courant = labelNoeud.get(this.graphe.get(this.idDestination));
 
-<<<<<<< HEAD
-            PlusCourtChemin.addNoeud(noeud_courant.getSommet_courant());
-=======
             PlusCourtChemin.addNoeud(noeud_courant.getNoeud());
->>>>>>> 5d41b4e9a1721de5e131071517d089f4663c9136
             while (noeud_courant.getNoeudPrec() != null) {
             	PlusCourtChemin.addNoeud(noeud_courant.getNoeudPrec());
                 noeud_courant = labelNoeud.get(noeud_courant.getNoeudPrec());
