@@ -353,7 +353,12 @@ public class Path {
      * @return Last node of the path.
      */
     public Node getDestination() {
-        return arcs.get(arcs.size() - 1).getDestination();
+    	if (arcs.size() == 0) {
+    		return (null);
+    	}
+    	else {
+    		return arcs.get(arcs.size() - 1).getDestination();
+    	}
     }
 
     /**
