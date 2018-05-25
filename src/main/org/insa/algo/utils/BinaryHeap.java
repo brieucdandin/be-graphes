@@ -1,4 +1,5 @@
 //
+
 // ******************PUBLIC OPERATIONS*********************
 // void insert( x ) --> Insert x
 // Comparable deleteMin( )--> Return and remove smallest item
@@ -10,6 +11,7 @@
 package org.insa.algo.utils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 
 /**
@@ -21,11 +23,18 @@ import java.util.Iterator;
  */
 public class BinaryHeap<E extends Comparable<E>> implements PriorityQueue<E> {
 
+<<<<<<< HEAD
     private HashMap<E, Integer> map;
     // Number of elements in heap.
     private int currentSize;
+=======
+	private HashMap<E, Integer> map;
+	
+	// Number of elements in heap
+	private int currentSize;
+>>>>>>> 5d41b4e9a1721de5e131071517d089f4663c9136
 
-    // The heap array.
+	// The heap array.
     private final ArrayList<E> array;
 
     /**
@@ -204,6 +213,18 @@ public class BinaryHeap<E extends Comparable<E>> implements PriorityQueue<E> {
         System.out.println();
     }
 
+	/**
+	 * Update heap's elements (place it at the right position in the heap by percolating up/down).
+	 */
+	public void update(E value)
+	{
+		this.remove(value);
+		this.insert(value);
+//		int index = this.map.get(value);
+//		this.percolateUp(index);
+//		this.percolateDown(index);
+	}
+
     /**
      * Prints the elements of the heap according to their respective order.
      */
@@ -224,6 +245,7 @@ public class BinaryHeap<E extends Comparable<E>> implements PriorityQueue<E> {
         System.out.println();
     }
 
+<<<<<<< HEAD
     /**
      * Update heap's elements (place it at the right position in the heap by percolating up/down).
      */
@@ -244,4 +266,15 @@ public class BinaryHeap<E extends Comparable<E>> implements PriorityQueue<E> {
         return this.map.containsKey(value);
     }
 
+=======
+	/**
+	 * Check if an element is in the heap.
+	 * @param value
+	 * @return True if the element value is in the heap, false if not
+	 */
+	public boolean exist(E value)
+	{
+		return this.map.containsKey(value);
+	}
+>>>>>>> 5d41b4e9a1721de5e131071517d089f4663c9136
 }
