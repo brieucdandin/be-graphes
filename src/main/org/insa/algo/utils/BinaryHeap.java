@@ -23,17 +23,11 @@ import java.util.Iterator;
  */
 public class BinaryHeap<E extends Comparable<E>> implements PriorityQueue<E> {
 
-<<<<<<< HEAD
+
     private HashMap<E, Integer> map;
     // Number of elements in heap.
     private int currentSize;
-=======
-	private HashMap<E, Integer> map;
 	
-	// Number of elements in heap
-	private int currentSize;
->>>>>>> 5d41b4e9a1721de5e131071517d089f4663c9136
-
 	// The heap array.
     private final ArrayList<E> array;
 
@@ -245,28 +239,7 @@ public class BinaryHeap<E extends Comparable<E>> implements PriorityQueue<E> {
         System.out.println();
     }
 
-<<<<<<< HEAD
-    /**
-     * Update heap's elements (place it at the right position in the heap by percolating up/down).
-     */
-    public void update(E value)
-    {
-        int index = this.map.get(value);
-        this.percolateUp(index);
-        this.percolateDown(index);
-    }
 
-    /**
-     * Check if an element is in the heap.
-     * @param value
-     * @return True if the element value is in the heap, false if not
-     */
-    public boolean exist(E value)
-    {
-        return this.map.containsKey(value);
-    }
-
-=======
 	/**
 	 * Check if an element is in the heap.
 	 * @param value
@@ -276,5 +249,5 @@ public class BinaryHeap<E extends Comparable<E>> implements PriorityQueue<E> {
 	{
 		return this.map.containsKey(value);
 	}
->>>>>>> 5d41b4e9a1721de5e131071517d089f4663c9136
+
 }
