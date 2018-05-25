@@ -21,6 +21,7 @@ import java.util.Iterator;
  */
 public class BinaryHeap<E extends Comparable<E>> implements PriorityQueue<E> {
 
+    private HashMap<E, Integer> map;
     // Number of elements in heap.
     private int currentSize;
 
@@ -33,6 +34,7 @@ public class BinaryHeap<E extends Comparable<E>> implements PriorityQueue<E> {
     public BinaryHeap() {
         this.currentSize = 0;
         this.array = new ArrayList<E>();
+        this.map = new HashMap<E, Integer>();
     }
 
     /**
@@ -178,6 +180,7 @@ public class BinaryHeap<E extends Comparable<E>> implements PriorityQueue<E> {
     @Override
     public E deleteMin() throws EmptyPriorityQueueException {
         E minItem = findMin();
+        this.map.remove(minItem);
         E lastItem = this.array.get(--this.currentSize);
         this.arraySet(0, lastItem);
         this.percolateDown(0);
@@ -219,6 +222,26 @@ public class BinaryHeap<E extends Comparable<E>> implements PriorityQueue<E> {
         System.out.println();
         System.out.println("--------  End of heap  --------");
         System.out.println();
+    }
+
+    /**
+     * Update heap's elements (place it at the right position in the heap by percolating up/down).
+     */
+    public void update(E value)
+    {
+        int index = this.map.get(value);
+        this.percolateUp(index);
+        this.percolateDown(index);
+    }
+
+    /**
+     * Check if an element is in the heap.
+     * @param value
+     * @return True if the element value is in the heap, false if not
+     */
+    public boolean exist(E value)
+    {
+        return this.map.containsKey(value);
     }
 
 }

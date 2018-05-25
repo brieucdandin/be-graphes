@@ -136,10 +136,10 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
 
                         //TODO: Utiliser les methodes de BinaryHeap
                         if (tas.exist(LabelDestination)) {
-                        	LabelDestination.setPere(x);
+                        	LabelDestination.setNoeudPrec(x);
                             tas.update(LabelDestination);
                         } else {
-                        	LabelDestination.setPere(x);
+                        	LabelDestination.setNoeudPrec(x);
                             tas.insert(LabelDestination);
                             TailleTas++;
                         }
@@ -163,9 +163,9 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
             Label noeud_courant = labelNoeud.get(this.graphe.getNoeudById(this.destination));
 
             PlusCourtChemin.addNoeud(noeud_courant.getSommet_courant());
-            while (noeud_courant.getPere() != null) {
-            	PlusCourtChemin.addNoeud(noeud_courant.getPere());
-                noeud_courant = labelNoeud.get(noeud_courant.getPere());
+            while (noeud_courant.getNoeudPrec() != null) {
+            	PlusCourtChemin.addNoeud(noeud_courant.getNoeudPrec());
+                noeud_courant = labelNoeud.get(noeud_courant.getNoeudPrec());
             }
 
             PlusCourtChemin.inverseChemin();
