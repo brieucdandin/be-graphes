@@ -43,19 +43,12 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
          */
 
 
-        Path PlusCourtChemin = new Path(this.data.getGraph(), this.data.getGraph().get(this.ListeLabels.get(idOrigine).getNoeud().getId() /*origine*/),
-        													  this.data.getGraph().get(this.ListeLabels.get(idDestination).getNoeud().getId()) /*destination*/);
-
-        //Verification de l'existence des extremites 
-        if (PlusCourtChemin.getOrigin() == null) {
-            System.out.println("[ERREUR] L'origine demandée (" + this.idOrigine + ") n'existe pas");
-        }
-        else if (PlusCourtChemin.getDestination() == null) {
-            System.out.println("[ERREUR] La destination demandée (" + this.idDestination + ") n'existe pas");
-        }
-
         //Creation des labels
+        //TODO: Il n'est pas necessaire de creer un label pour tous les noeuds ! Il faudrait les creer au fur et a mesure
         for(Node n: data.getGraph().getNoeuds()) {
+        	
+        	System.out.println("Un noeud");	//Pour tester l'erreur ligne 72
+            
         	Label l = new Label(n, null, null, Double.POSITIVE_INFINITY, false);
         	ListeLabels.add(l);
         }
@@ -63,8 +56,20 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         Node NoeudOrigine = data.getGraph().get(this.idOrigine);
         
 
+        Path PlusCourtChemin = new Path(this.data.getGraph(), this.data.getGraph().get(this.ListeLabels.get(idOrigine).getNoeud().getId())		/*origine*/,
+        													  this.data.getGraph().get(this.ListeLabels.get(idDestination).getNoeud().getId())	/*destination*/);
+
+        //Verification de l'existence des noeuds aux extremites
+        if (PlusCourtChemin.getOrigin() == null) {
+        	System.out.println("[ERREUR] L'origine demandée (" + this.idOrigine + ") n'existe pas");
+        }
+        else if (PlusCourtChemin.getDestination() == null) {
+            System.out.println("[ERREUR] La destination demandée (" + this.idDestination + ") n'existe pas");
+        }
+
+
         //Insertion du sommet source dans le tas
-        tas.insert(ListeLabels.get(idOrigine));	//TODO: Il y avait une erreur ici ! (Cf. warning)
+        tas.insert(ListeLabels.get(idOrigine));	//TODO: Erreur ici ! (Cf. warning)
 
 
         /**			ITERATION
@@ -83,8 +88,47 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
          * 		end for
          * end while
          */
+
+
         
+      while (!ParcoursMarq(ListeLabels)) {
+    	
+   		Label lx = tas.findMin();
+   		lx.setMarq(true);
+   		
+   		//On parcourt la liste de labels pour enregistrer ceux des points fils de x dans Successeursdex.
+   		ArrayList<Label> Successeursdex = new ArrayList<Label>();
+   		for (Label lk : ListeLabels) {
+   			if (lk.getNoeudPrec() == lx.getNoeud()) {
+   				Successeursdex.add(lk);
+   			}
+   		}
+   		
+   		//On parcourt la liste des labels des successeurs de x (obtenue ci-dessus).
+    	for (Label ly : Successeursdex) {
+    		if (ly.getMarq() == false) {
+    			
+    			// Mise en memoire tampon de Cost(y) pour le test du prochain if
+    			double a = ly.getCout();
+    			
+    			// TODO: Verifier que l'algo fonctionne bien comme ca : on est partis du principe que W(x,y) = min(cout(x), Cout(x))
+    			ly.setCout(Math.min(ly.getCout(), lx.getCout() + Math.min(ly.getCout(), lx.getCout()) ));
+    			
+    			// Si y a ete modifie
+    			if (a != ly.getCout()) {
+    				tas.insert(ly);
+    				ly.setNoeudPrec(lx.getNoeud());
+    			}
+    		}
+    	} // FIN FOR successeurs
         
+    } // Fin ITERATION
+
+
+      
+        /**
+
+
         boolean DestinationAtteinte = false;
 
 //        // Pour les statistiques
@@ -122,8 +166,8 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
                 //Traitement des sommets non-marques
                 if (!LabelDestination.getMarq()) {
 
-                    compareTemps = LabelDestination.getCout() > labelNoeud.get(x).getCout() + a.getTravelTime() && this.mode == PlusCourtChemin.MODE_TEMPS;
-                    compareDistance = LabelDestination.getCout() > labelNoeud.get(x).getCout() + a.getTravelTime() * a.getDescripteur().vitesseMax() * 1000 / 60 && (this.mode == PlusCourtChemin.MODE_DISTANCE);
+                    compareTemps = LabelDestination.getCout() > labelNoeud.get(x).getCout() + a.getTravelTime() && this.mode == PlusCourtChemin.TIME;
+                    compareDistance = LabelDestination.getCout() > labelNoeud.get(x).getCout() + a.getTravelTime() * a.getDescripteur().vitesseMax() * 1000 / 60 && (this.mode == PlusCourtChemin.LENGHT);
 
 
                     //Si le out est plus petit, on l'update
@@ -162,11 +206,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
 
             Label noeud_courant = labelNoeud.get(this.graphe.get(this.idDestination));
 
-<<<<<<< HEAD
-            PlusCourtChemin.addNoeud(noeud_courant.getSommet_courant());
-=======
             PlusCourtChemin.addNoeud(noeud_courant.getNoeud());
->>>>>>> 5d41b4e9a1721de5e131071517d089f4663c9136
             while (noeud_courant.getNoeudPrec() != null) {
             	PlusCourtChemin.addNoeud(noeud_courant.getNoeudPrec());
                 noeud_courant = labelNoeud.get(noeud_courant.getNoeudPrec());
@@ -197,39 +237,9 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
 //        return PlusCourtChemin;
 
         
+
+*/
         
-//        while (!ParcoursMarq(ListeLabels)) {
-//        	
-//       		Label lx = tas.findMin();
-//       		lx.setMarq(true);
-//       		
-//       		//On parcourt la liste de labels pour enregistrer ceux des points fils de x dans Successeursdex.
-//       		ArrayList<Label> Successeursdex = new ArrayList<Label>();
-//       		for (Label lk : ListeLabels) {
-//       			if (lk.getNoeudPrec() == lx.getNoeud()) {
-//       				Successeursdex.add(lk);
-//       			}
-//       		}
-//       		
-//       		//On parcourt la liste des labels des successeurs de x (obtenue ci-dessus).
-//        	for (Label ly : Successeursdex) {
-//        		if (ly.getMarq() == false) {
-//        			
-//        			// Mise en memoire tampon de Cost(y) pour le test du prochain if
-//        			double a = ly.getCout();
-//        			
-//        			// TODO: Verifier que l'algo fonctionne bien comme ca : on est partis du principe que W(x,y) = min(cout(x), Cout(x))
-//        			ly.setCout(Math.min(ly.getCout(), lx.getCout() + Math.min(ly.getCout(), lx.getCout()) ));
-//        			
-//        			// Si y a ete modifie
-//        			if (a != ly.getCout()) {
-//        				tas.insert(ly);
-//        				ly.setNoeudPrec(lx.getNoeud());
-//        			}
-//        		}
-//        	} // FIN FOR successeurs
-//            
-//        } // Fin ITERATION
         
     } // Fin constructeur
 
