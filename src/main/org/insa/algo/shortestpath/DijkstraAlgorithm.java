@@ -136,10 +136,10 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
 
                         //TODO: Utiliser les methodes de BinaryHeap
                         if (tas.exist(LabelDestination)) {
-                        	LabelDestination.setPere(x);
+                        	LabelDestination.setNoeudPrec(x);
                             tas.update(LabelDestination);
                         } else {
-                        	LabelDestination.setPere(x);
+                        	LabelDestination.setNoeudPrec(x);
                             tas.insert(LabelDestination);
                             TailleTas++;
                         }
@@ -160,37 +160,37 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         // On recupere le chemin si on atteint le sommet
         if (DestinationAtteinte) {
 
-            Label noeud_courant = labelNoeud.get(this.graphe.getNoeudById(this.destination));
+            Label noeud_courant = labelNoeud.get(this.graphe.get(this.idDestination));
 
-            PlusCourtChemin.addNoeud(noeud_courant.getSommet_courant());
-            while (noeud_courant.getPere() != null) {
-            	PlusCourtChemin.addNoeud(noeud_courant.getPere());
-                noeud_courant = labelNoeud.get(noeud_courant.getPere());
+            PlusCourtChemin.addNoeud(noeud_courant.getNoeud());
+            while (noeud_courant.getNoeudPrec() != null) {
+            	PlusCourtChemin.addNoeud(noeud_courant.getNoeudPrec());
+                noeud_courant = labelNoeud.get(noeud_courant.getNoeudPrec());
             }
 
             PlusCourtChemin.inverseChemin();
             PlusCourtChemin.initArcAvecNoeuds();
 
-            PlusCourtChemin.dessineChemin(graphe.getDessin(), false);
+//            PlusCourtChemin.dessineChemin(graphe.getDessin(), false);
 
-            stats.setNbre_sommets_chemin(PlusCourtChemin.getNoeuds_chemin().size());
-            stats.setNbre_arcs_chemin(PlusCourtChemin.getArcs_chemin().size());
-            stats.setCheminValide(PlusCourtChemin.checkChemin());
-            stats.setLongueur_chemin(PlusCourtChemin.calculDistanceChemin());
-            stats.setTemps_parcours_chemin(PlusCourtChemin.calculTempsChemin());
+//            stats.setNbre_sommets_chemin(PlusCourtChemin.getNoeuds_chemin().size());
+//            stats.setNbre_arcs_chemin(PlusCourtChemin.getArcs_chemin().size());
+//            stats.setCheminValide(PlusCourtChemin.checkChemin());
+//            stats.setLongueur_chemin(PlusCourtChemin.calculDistanceChemin());
+//            stats.setTemps_parcours_chemin(PlusCourtChemin.calculTempsChemin());
 
-            if (affichage_stats) {
-                stats.print();
-            }
+//            if (affichage_stats) {
+//                stats.print();
+//            }
+//
+//            PlusCourtChemin.setStatistiques(stats);
+//        } else {
+//            System.out.println("[Djikstra] Aucun chemin trouvé entre " + this.idOrigine + " et " + this.idDestination);
+//        }
 
-            PlusCourtChemin.setStatistiques(stats);
-        } else {
-            System.out.println("[Djikstra] Aucun chemin trouvé entre " + this.idOrigine + " et " + this.idDestination);
-        }
+//        this.chemin_result = PlusCourtChemin;
 
-        this.chemin_result = PlusCourtChemin;
-
-        return PlusCourtChemin;
+//        return PlusCourtChemin;
 
         
         

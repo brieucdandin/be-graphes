@@ -42,7 +42,7 @@ public class Label implements Comparable <Label> {
 	}
 	
 	public void setNoeudPrec(Node noeudPrec) {
-		this.noeudPrec=noeudPrec;
+		this.noeudPrec = noeudPrec;
 	}
 	
 //	public void setArcPrec(Arc arcPrec) {
@@ -66,4 +66,5 @@ public class Label implements Comparable <Label> {
 		else if (this.getNoeud().getId() > other.getNoeud().getId()) {return 0;}
 		else {return -1;}
 	}
+
 }
