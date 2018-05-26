@@ -96,13 +96,16 @@ public class Path {
     			throws IllegalArgumentException {
     	
     	
-    	  // Unique node case
+    	// Unique node case
         if (nodes.size() == 1) {
-            return new Path(graph, nodes.get(0));
+            return new Path(graph,nodes.get(0));
         }
 
         List<Arc> arcs = new ArrayList<Arc>();
-
+        if (nodes.size() == 0) {
+        	return new Path(graph,arcs);
+        }
+        
         int i = 0;
         while (i < (nodes.size() - 1)){
             boolean connected = false;
