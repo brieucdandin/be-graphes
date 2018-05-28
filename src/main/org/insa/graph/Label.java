@@ -2,16 +2,15 @@ package org.insa.graph;
 
 public class Label implements Comparable <Label> {
 
-	private Node noeud;
-	private boolean marquage;
-	private double cout;
+	protected Node noeud;
+	protected boolean marquage;
+	protected double cout;
 
-	public Label(Node noeud) {
-		this.marquage = false;
-		this.noeud = noeud;
-		this.cout = Double.POSITIVE_INFINITY;
+	// TODO Ici, j'ai rajoute un constructeur sans argument pour regler une erreur d'heritage vers LabelStar. Il serait mieux de ne pas s'en encombrer.
+	public Label() {
+		super();
 	}
-
+	
 	public Label(Node noeud, boolean marquage, double cout) {
 		this.marquage = marquage;
 		this.noeud = noeud;

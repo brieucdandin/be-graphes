@@ -53,7 +53,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         Label[] marquage = new Label[data.getGraph().size()];
 
         for(Node n: data.getGraph()) {
-            marquage[n.getId()] = new Label(n);
+            marquage[n.getId()] = new Label(n, false, Double.POSITIVE_INFINITY);
         }
         marquage[data.getOrigin().getId()].setCout(0.0);
         
