@@ -6,11 +6,6 @@ public class Label implements Comparable <Label> {
 	protected boolean marquage;
 	protected double cout;
 
-	// TODO Ici, j'ai rajoute un constructeur sans argument pour regler une erreur d'heritage vers LabelStar. Il serait mieux de ne pas s'en encombrer.
-	public Label() {
-		super();
-	}
-	
 	public Label(Node noeud, boolean marquage, double cout) {
 		this.marquage = marquage;
 		this.noeud = noeud;

@@ -10,7 +10,7 @@ import org.insa.graph.Label;
 
 public class DijkstraAlgorithm extends ShortestPathAlgorithm {
 
-    protected BinaryHeap<Label> tas = new BinaryHeap<Label>();
+	protected BinaryHeap<Label> tas = new BinaryHeap<Label>();
 
 
     public DijkstraAlgorithm(ShortestPathData data) {
