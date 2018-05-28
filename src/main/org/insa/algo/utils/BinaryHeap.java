@@ -1,5 +1,3 @@
-//
-
 // ******************PUBLIC OPERATIONS*********************
 // void insert( x ) --> Insert x
 // Comparable deleteMin( )--> Return and remove smallest item
@@ -210,13 +208,9 @@ public class BinaryHeap<E extends Comparable<E>> implements PriorityQueue<E> {
 	/**
 	 * Update heap's elements (place it at the right position in the heap by percolating up/down).
 	 */
-	public void update(E value)
-	{
+	public void update(E value) {
 		this.remove(value);
 		this.insert(value);
-//		int index = this.map.get(value);
-//		this.percolateUp(index);
-//		this.percolateDown(index);
 	}
 
     /**
@@ -244,8 +238,7 @@ public class BinaryHeap<E extends Comparable<E>> implements PriorityQueue<E> {
 	 * @param value
 	 * @return True if the element value is in the heap, false if not
 	 */
-	public boolean exist(E value)
-	{
+	public boolean exist(E value) {
 		return this.map.containsKey(value);
 	}
 

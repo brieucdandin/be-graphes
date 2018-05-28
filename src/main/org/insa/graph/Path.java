@@ -134,109 +134,8 @@ public class Path {
         }
 
         return new Path(graph, arcs);
+}    	
 
-        //TODO: Enlever si pas necessaire
-    /*	if (nodes.size()==0) {
-    		return new Path(graph);
-    	}
-    	if (nodes.size()==1) {
-    		return new Path(graph,nodes.get(0));
-    	}	
-    	
-        List<Arc> arcs = new ArrayList<Arc>(); //path final
-        ListIterator<Node> itnodes = nodes.listIterator();
-        Arc arctemp;
-        Arc plusRap = null; //arc actuellement le plus court dans iteration arcs
-        Node n;
-        Node prevNode = null;
-        
-        if (itnodes.hasNext()){
-        	prevNode= itnodes.next();
-        }
-       
-        
-        while(itnodes.hasNext()){ //iterations Nodes de nodes
-        	n = itnodes.next();
-        	Iterator<Arc> itarc = prevNode.iterator();
-        	double longueur =0;
-        	boolean found = false; //si pas trouve, exception
-        	 
-        	while (itarc.hasNext()){ //iteration arcs successeurs de n
-        		arctemp = itarc.next();
-        		if (arctemp.getDestination() == n && (arctemp.getLength()<longueur || found == false)){
-        			plusRap = arctemp;
-        			longueur = plusRap.getLength();
-        			found = true;
-        			//ON TESTE SI PLUS COURT QUE LES AUTRES ET STOCKE
-        			//MET found A TRUE
-        		}
-        		
-        	}
-        	if (found) {
-        	arcs.add(plusRap);
-        	prevNode = n;
-        	}
-        	else {
-        		throw new IllegalArgumentException();
-        	}
-        }
-        
-        return new Path(graph, arcs);
-        */
-       
-    }    	
-
-    //TODO: Enlever si pas necessaire
-    /*	if (nodes.size()==0) {
-    		return new Path(graph);
-    	}
-    	if (nodes.size()==1) {
-    		return new Path(graph,nodes.get(0));
-    	}		
-    	
-        List<Arc> arcs = new ArrayList<Arc>(); //path final
-        ListIterator<Node> itnodes = nodes.listIterator();
-        Arc arctemp;
-        Arc plusCourt = null; //arc actuellement le plus court dans iteration arcs
-        Node n;
-       
-        Node prevNode = null;
-        
-        if (itnodes.hasNext()){
-        	prevNode= itnodes.next();
-        }
-       
-        
-        while(itnodes.hasNext()){ //iterations Nodes de nodes
-        	n = itnodes.next();
-        	// verifier que liste arcs pas vide
-        	Iterator<Arc> itarc = prevNode.iterator();
-        	float longueur =0;
-        	 boolean found = false; //si pas trouve, exception
-        	 
-        	while (itarc.hasNext()){ //iteration arcs successeurs de n
-        		arctemp = itarc.next();
-        		if (arctemp.getDestination() == n && (arctemp.getLength()<longueur || found == false)){
-        			plusCourt = arctemp;
-        			longueur = plusCourt.getLength();
-        			//ON TESTE SI PLUS COURT QUE LES AUTRES ET STOCKE
-        			//MET found A TRUE
-        		}
-        		
-        	}
-        	if (found) {
-        	arcs.add(plusCourt);
-        	prevNode = n;
-        	}
-        	else {
-        		throw new IllegalArgumentException();
-        	}
-        }
-        
-        return new Path(graph, arcs);
-    }
-	*/
-    
     /**
      * Concatenate the given paths.
      * 
@@ -248,9 +147,6 @@ public class Path {
      *         map do not match, or the end of a path is not the beginning of the
      *         next).
      */
-    
-        
-    
     public static Path concatenate(Path... paths) throws IllegalArgumentException {
         if (paths.length == 0) {
             throw new IllegalArgumentException("Cannot concatenate an empty list of paths.");

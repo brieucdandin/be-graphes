@@ -3,20 +3,14 @@ package org.insa.algo.shortestpath;
 import org.insa.graph.*;
 import java.util.ArrayList;
 import java.util.*;
-//import java.util.HashMap;
 import org.insa.algo.AbstractSolution.Status;
 import org.insa.algo.utils.BinaryHeap;
-//import org.insa.algo.utils.Label;
 import org.insa.graph.Label;
 
 
 public class DijkstraAlgorithm extends ShortestPathAlgorithm {
 
     protected BinaryHeap<Label> tas = new BinaryHeap<Label>();
-
-//    protected Chemin chemin_result;
-
-//    protected int mode;
 
 
     public DijkstraAlgorithm(ShortestPathData data) {
@@ -26,19 +20,22 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
 	/**
 	 * Parcours pour savoir si les labels ont ete marques
 	 */
-   /* public boolean ParcoursMarq(ArrayList<Label> Lab){
+/*
+
+	public boolean ParcoursMarq(ArrayList<Label> Lab) {
     	for(Label l: Lab) {
         	if(l.getMarq() == false){
        			return false;
         	}
         }
        	return true;
-     }*/
+     }
+
+*/
     
     
     @Override
-    protected ShortestPathSolution doRun() 
-    {
+    protected ShortestPathSolution doRun() {
         ShortestPathData data = getInputData();
 
         /**         INITIALISATION
@@ -52,7 +49,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
          * Insert(s, tas)
          */
 
-        //Creation d'un tableau Label pour marquer les Labels'
+        //Creation d'un tableau Label pour marquer les Labels
         Label[] marquage = new Label[data.getGraph().size()];
 
         for(Node n: data.getGraph()) 
@@ -61,16 +58,17 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         }
         marquage[data.getOrigin().getId()].setCout(0.0);
         
-        //Création d'un tableau contenant les noeud parcourus
+        //Creation d'un tableau contenant les noeud parcourus
         Arc[] prec = new Arc[data.getGraph().size()];
 
-        //On notifie qu'on est déjà passé par l'origine
+        //On notifie qu'on est deja passe par l'origine
         notifyOriginProcessed(data.getOrigin());
 
         //Insertion du sommet source dans le tas
-        //tas.insert(ListeLabels.get(idOrigine)); //TODO: Erreur ici ! (Cf. warning)
+        //tas.insert(ListeLabels.get(idOrigine));	//TODO: Erreur avec la liste de label a regler eventuellement
         tas.insert(marquage[data.getOrigin().getId()]);
 
+        
         /**         ITERATION
          * 
          * While il existe des sommets non marques
@@ -102,7 +100,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
             
                 nbNoeud++;
             
-                //On parcourt la liste des successeurs de x (obtenue ci-dessus).
+                //Parcours de la liste des successeurs de x (obtenue ci-dessus)
                 for (Arc succ : x)
                 {
                 	if(!data.isAllowed(succ))
@@ -141,7 +139,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
 
         ShortestPathSolution solution = null;
 
-	    //la destination n'a pas de noeud precedent alors on ne peut pas utiliser l'algorithme
+	    //Si la destination n'a pas de noeud precedent, alors on ne peut pas utiliser l'algorithme.
 	    if (prec[data.getDestination().getId()]==null)
 	    {
 	    	solution = new ShortestPathSolution(data, Status.INFEASIBLE);
