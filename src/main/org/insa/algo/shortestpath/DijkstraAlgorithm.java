@@ -52,8 +52,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         //Creation d'un tableau Label pour marquer les Labels
         Label[] marquage = new Label[data.getGraph().size()];
 
-        for(Node n: data.getGraph()) 
-        {
+        for(Node n: data.getGraph()) {
             marquage[n.getId()] = new Label(n);
         }
         marquage[data.getOrigin().getId()].setCout(0.0);
@@ -65,8 +64,8 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         notifyOriginProcessed(data.getOrigin());
 
         //Insertion du sommet source dans le tas
-        //tas.insert(ListeLabels.get(idOrigine));	//TODO: Erreur avec la liste de label a regler eventuellement
         tas.insert(marquage[data.getOrigin().getId()]);
+        //tas.insert(ListeLabels.get(idOrigine));	//TODO: Erreur avec la liste de label a regler eventuellement
 
         
         /**         ITERATION
@@ -88,11 +87,9 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
 
         boolean val = true;
         int nbNoeud = 0;
-        while (val) 
-        {
+        while (val) {
             val = false;
-            if(!tas.isEmpty())
-            {
+            if (!tas.isEmpty()) {
                 Label lx = tas.deleteMin();
                 Node x = lx.getNoeud();
                 notifyNodeMarked(x);
@@ -101,63 +98,50 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
                 nbNoeud++;
             
                 //Parcours de la liste des successeurs de x (obtenue ci-dessus)
-                for (Arc succ : x)
-                {
-                	if(!data.isAllowed(succ))
-                	{
+                for (Arc succ : x) {
+                	if (!data.isAllowed(succ)) {
                 		continue;
                 	}
                 	Label ly = marquage[succ.getDestination().getId()];
-                	if(!ly.getMarq())
-                	{
+                	if (!ly.getMarq()) {
                 		val = true;
                 		double a = ly.getCout();
                 		double cout = Math.min(ly.getCout(), lx.getCout()+data.getCost(succ));
                 		ly.setCout(cout);
-                		if(cout != a)
-                		{
+                		if (cout != a) {
                 			tas.insert(ly);
                 			prec[succ.getDestination().getId()] = succ;
                 		} 
-                		if (Double.isInfinite(a) && Double.isFinite(cout))
-                		{
+                		if (Double.isInfinite(a) && Double.isFinite(cout)) {
                 			notifyNodeReached(ly.getNoeud());
                 		}
                 	}
                 }
 
-                if ((x.equals(data.getDestination())) || (nbNoeud >= data.getGraph().size())) 
-                {
-                	val = false;
-                }
-                else
-                {
-                	val = true;
-                }
+                val =  ( x.equals(data.getDestination()) || nbNoeud >= data.getGraph().size() )  ? false : true;
+
             }
         }
 
-        ShortestPathSolution solution = null;
+        ShortestPathSolution PlusCourtChemin = null;
 
 	    //Si la destination n'a pas de noeud precedent, alors on ne peut pas utiliser l'algorithme.
-	    if (prec[data.getDestination().getId()]==null)
-	    {
-	    	solution = new ShortestPathSolution(data, Status.INFEASIBLE);
+	    if (prec[data.getDestination().getId()] == null) {
+	    	PlusCourtChemin = new ShortestPathSolution(data, Status.INFEASIBLE);
 	    }
-	    else
-	    {
+	    else {
 	    	notifyDestinationReached(data.getDestination());
 	
 	        ArrayList <Arc> ListArc = new ArrayList<>();
 	        Arc arc = prec[data.getDestination().getId()];
-	        while(arc != null)
-	        {
+	        while(arc != null) {
 	        	ListArc.add(arc);
 	            arc = prec[arc.getOrigin().getId()];
 	        }
 	        Collections.reverse(ListArc);
-	        solution = new ShortestPathSolution(data, Status.OPTIMAL, new Path(data.getGraph(), ListArc));
+	        PlusCourtChemin = new ShortestPathSolution(data, Status.OPTIMAL, new Path(data.getGraph(), ListArc));
 	    }
-	    return solution;
+	    
+	    return PlusCourtChemin;
     }
 }
