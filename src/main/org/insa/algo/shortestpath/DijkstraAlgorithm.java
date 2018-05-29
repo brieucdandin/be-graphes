@@ -17,7 +17,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         super(data);
     }
 
-	/**
+    /**
 	 * Parcours pour savoir si les labels ont ete marques
 	 */
 /*
@@ -49,15 +49,8 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
          * Insert(s, tas)
          */
 
-        // TODO creer une methode initialisant la liste de labels (afin de n'avoirqu'a modifier ca dans AStar)
-        
         //Creation d'un tableau Label pour marquer les Labels
-        Label[] marquage = new Label[data.getGraph().size()];
-
-        for(Node n: data.getGraph()) {
-            marquage[n.getId()] = new Label(n, false, Double.POSITIVE_INFINITY);
-        }
-        marquage[data.getOrigin().getId()].setCout(0.0);
+        Label[] marquage = initTabLabels();
         
         //Creation d'un tableau contenant les noeud parcourus
         Arc[] prec = new Arc[data.getGraph().size()];
@@ -148,4 +141,18 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
 	    
 	    return PlusCourtChemin;
     }
+
+    /**
+     * Methode initialisant la liste de labels (afin de n'avoir qu'a modifier ca dans AStar)
+     */
+	private Label[] initTabLabels() {
+		Label[] marquage = new Label[data.getGraph().size()];
+
+        for(Node n: data.getGraph()) {
+        	marquage[n.getId()] = new Label(n, false, Double.POSITIVE_INFINITY);
+        }
+        marquage[((ShortestPathData) data).getOrigin().getId()].setCout(0.0);
+        
+		return marquage;
+	}
 }
