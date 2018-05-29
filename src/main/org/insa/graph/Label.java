@@ -33,11 +33,11 @@ public class Label implements Comparable <Label> {
 	}
 	
 	public void setCout(double cout) {
-		this.cout=cout;
+		this.cout = cout;
 	}
 
 	public void setMarq(boolean marquage) {
-		this.marquage=marquage;
+		this.marquage = marquage;
 	}
 	
 	public void setNoeud(Node noeud) {

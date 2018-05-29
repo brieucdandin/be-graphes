@@ -114,8 +114,6 @@ public final class Node implements Comparable<Node>, Iterable<Arc> {
         return this.successors;
     }
 
-    
-    @Override
     public Iterator<Arc> iterator() {
         return Collections.unmodifiableList(this.successors).iterator();
     }

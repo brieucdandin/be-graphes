@@ -60,7 +60,6 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
 
         //Insertion du sommet source dans le tas
         tas.insert(marquage[data.getOrigin().getId()]);
-        //tas.insert(ListeLabels.get(idOrigine));	//TODO: Erreur avec la liste de label a regler eventuellement
 
         
         /**         ITERATION
