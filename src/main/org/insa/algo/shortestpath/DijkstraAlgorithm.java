@@ -49,6 +49,8 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
          * Insert(s, tas)
          */
 
+        // TODO creer une methode initialisant la liste de labels (afin de n'avoirqu'a modifier ca dans AStar)
+        
         //Creation d'un tableau Label pour marquer les Labels
         Label[] marquage = new Label[data.getGraph().size()];
 
@@ -84,6 +86,8 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
          *      end for
          * end while
          */
+        
+        // TODO Le programme s'arrete au bout de 2 secondes
 
         boolean val = true;
         int nbNoeud = 0;
