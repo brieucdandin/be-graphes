@@ -50,7 +50,14 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
          */
 
         //Creation d'un tableau Label pour marquer les Labels
-        Label[] marquage = initTabLabels();
+        //Label[] marquage = initTabLabels();
+        Label[] marquage = new Label[data.getGraph().size()];
+        
+        //initialisation
+        for(Node n : data.getGraph()) {
+        	marquage[n.getId()] = new Label(n, false, Double.POSITIVE_INFINITY);
+        }
+        marquage[data.getOrigin().getId()].setCout(0.0);
         
         //Creation d'un tableau contenant les noeud parcourus
         Arc[] prec = new Arc[data.getGraph().size()];
