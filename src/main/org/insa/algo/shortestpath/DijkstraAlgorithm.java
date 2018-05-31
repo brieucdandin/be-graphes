@@ -32,6 +32,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
      }
 
 */
+    
     /**
      * Methode initialisant la liste de labels (afin de n'avoir qu'a modifier ca dans AStar)
      */
@@ -62,7 +63,6 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
          */
 
         //Initialisation avec creation d'un tableau Label pour marquer les Labels
-        //Label[] marquage = new Label[data.getGraph().size()];
         Label[] marquage = initTabLabels(data);
                        
         //Creation d'un tableau contenant les noeud parcourus
@@ -92,7 +92,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
          * end while
          */
         
-        // TODO Le programme s'arrete au bout de 2 secondes
+        // TODO Le programme s'arrete avant d'avoir parcouru tous les noeuds pour de longues distances.
 
         boolean val = true;
         int nbNoeud = 0;
