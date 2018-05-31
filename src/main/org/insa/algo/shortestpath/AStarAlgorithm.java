@@ -16,25 +16,31 @@ public class AStarAlgorithm extends DijkstraAlgorithm {
         super(data);
     }
 	
-	
-	/*private LabelStar[] initTabLabels(Node n, ShortestPathData d) {
+	@Override
+	protected Label[] initTabLabels(ShortestPathData data) {
 		LabelStar[] marquage = new LabelStar[data.getGraph().size()];
 
-        for(Node n: data.getGraph()) {
-        	double estimation = n.getPoint().distanceTo( data.getGraph().get(-1).getPoint() );
-        	marquage[n.getId()] = new LabelStar(n, false, Double.POSITIVE_INFINITY, estimation);
+        for(Node n : data.getGraph()) {
+        	/*double estimation = n.getPoint().distanceTo(data.getGraph().get(-1).getPoint() );
+        	marquage[n.getId()] = new LabelStar(n, false, Double.POSITIVE_INFINITY, estimation);*/
+        	if (data.getMode() == Mode.TIME) {
+				marquage[n.getId()] = new LabelStar(n, false, Double.POSITIVE_INFINITY, n.getPoint().distanceTo(data.getDestination().getPoint())/36.1);
+			}
+			else {
+				marquage[n.getId()] = new LabelStar(n, false, Double.POSITIVE_INFINITY, n.getPoint().distanceTo(data.getDestination().getPoint()));
+			}
         }
-        marquage[((ShortestPathData) data).getOrigin().getId()].setCout(0.0);
+        marquage[data.getOrigin().getId()].setCout(0.0);
         
 		return marquage;
-	}*/
+	}
 	
 	
 
     /**
      * Methode initialisant la liste de labels (afin de n'avoir qu'a modifier ca dans AStar)
      **/
-	@Override
+	/*@Override
 	protected ShortestPathSolution doRun() {
 		ShortestPathData data = getInputData();
 		LabelStar[] marquage = new LabelStar[data.getGraph().size()];
@@ -45,7 +51,7 @@ public class AStarAlgorithm extends DijkstraAlgorithm {
 				marquage[n.getId()] = new LabelStar(n, false, Double.POSITIVE_INFINITY, n.getPoint().distanceTo(data.getDestination().getPoint())/36.1);
 			}
 			else {
-				marquage[n.getId()] = new LabelStar(n, false, Double.POSITIVE_INFINITY, n.getPoint().distanceTo(data.getDestination().getPoint())/36.1);
+				marquage[n.getId()] = new LabelStar(n, false, Double.POSITIVE_INFINITY, n.getPoint().distanceTo(data.getDestination().getPoint()));
 			}
 		}
 		marquage[data.getOrigin().getId()].setCout(0.0);
@@ -111,7 +117,7 @@ public class AStarAlgorithm extends DijkstraAlgorithm {
 	    }
 	    
 	    return PlusCourtChemin;
-    }
+    }*/
 		
 		
 }
