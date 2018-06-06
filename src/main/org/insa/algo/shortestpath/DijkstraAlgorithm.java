@@ -75,7 +75,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
          * end while
          */
         
-        /*
+        /**
          * TODO
 		 * Le programme s'arrete avant d'avoir parcouru tous les noeuds pour de longues distances (presque toute la carte).
          * Bizarement, cela ne semble pas dependre du nombre de noeuds seul, mais plus du rapport nmb marques/nmb total : l'algorithme s'arrete juste avant Lille pour Toulouse->Lille sur la carte francaise, mais aussi avant Brest pour extremite Est de la Bretagne->Brest sur celle de la Bretagne. 
@@ -115,7 +115,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
                 	}
                 }
 
-                val =  ( x.equals(data.getDestination()) || nbNoeud >= data.getGraph().size() )  ? false : true;
+                val =  (x.equals(data.getDestination()))  ? false : true;
 
             }
         }
