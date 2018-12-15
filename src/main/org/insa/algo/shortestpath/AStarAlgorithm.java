@@ -24,7 +24,7 @@ public class AStarAlgorithm extends DijkstraAlgorithm {
 		for(Node n : data.getGraph()) {
 			double estimationDist = n.getPoint().distanceTo(data.getDestination().getPoint());
 			//Adaptation au mode TIME ou DISTANCE
-			double estimation = (data.getMode() == Mode.TIME) ? estimationDist/36.0 : estimationDist ;
+			double estimation = (data.getMode() == Mode.LENGTH) ? estimationDist : ((data.getMode() == Mode.TIME) ? estimationDist/36.0 : estimationDist) ;
         	marquage[n.getId()] = new LabelStar(n, false, Double.POSITIVE_INFINITY, estimation);
 		}
 		marquage[data.getOrigin().getId()].setCout(0.0);
